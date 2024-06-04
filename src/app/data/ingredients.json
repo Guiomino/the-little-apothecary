@@ -1,0 +1,724 @@
+{
+    "ingredients": [
+        {
+            "name": "Lumerite",
+            "type": "Mineral",
+            "description": "Lumerite is a mineral found on open-air veins in high mountains. It is known to reduce natural enthusiasm and calm ardor.",
+            "rarity": "Common",
+            "imagePath": "/images/Minerals/Lumerite.png",
+            "successRate": 90,
+            "priceRange": [1, 20]
+        },
+        {
+            "name": "Crystamide",
+            "type": "Mineral",
+            "description": "Crystamide crystals form deep within underground caverns. They provide mental clarity while inducing stress.",
+            "rarity": "Uncommon",
+            "imagePath": "/images/Minerals/Crystamide.png",
+            "successRate": 80,
+            "priceRange": [21, 60]
+        },
+        {
+            "name": "Pyrodine",
+            "type": "Mineral",
+            "description": "Pyrodine is a rare mineral found near volcanic regions. It enhances vitality but may lead to anger issues.",
+            "rarity": "Rare",
+            "imagePath": "/images/Minerals/Pyrodine.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Azurith",
+            "type": "Mineral",
+            "description": "Azurith is a precious gemstone often associated with tranquility. It promotes empathy but may induce disappointment.",
+            "rarity": "Uncommon",
+            "imagePath": "/images/Minerals/Azurith.png",
+            "successRate": 80,
+            "priceRange": [21, 60]
+        },
+        {
+            "name": "Flamarine",
+            "type": "Mineral",
+            "description": "Flamarine is a fiery crystal that imbues its user with passion. It enhances vitality but may cause stress.",
+            "rarity": "Rare",
+            "imagePath": "/images/Minerals/Flamarine.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Verdanite",
+            "type": "Mineral",
+            "description": "Verdanite is a green-hued mineral found deep within ancient forests. It promotes harmony but may induce isolation.",
+            "rarity": "Uncommon",
+            "imagePath": "/images/Minerals/Verdanite.png",
+            "successRate": 80,
+            "priceRange": [21, 60]
+        },
+        {
+            "name": "Perline",
+            "type": "Mineral",
+            "description": "Perline is a shimmering mineral with a calming effect. It brings serenity but may lead to disappointment.",
+            "rarity": "Common",
+            "imagePath": "/images/Minerals/Perline.png",
+            "successRate": 90,
+            "priceRange": [1, 20]
+        },
+        {
+            "name": "Saverstride",
+            "type": "Mineral",
+            "description": "Saverstride is a rare mineral often found in ancient ruins. It enhances vitality but may induce stress.",
+            "rarity": "Rare",
+            "imagePath": "/images/Minerals/Saverstride.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Aurorium",
+            "type": "Mineral",
+            "description": "Aurorium is a radiant mineral that glows softly in darkness. It enhances trust but may lead to disappointment.",
+            "rarity": "Common",
+            "imagePath": "/images/Minerals/Aurorium.png",
+            "successRate": 90,
+            "priceRange": [1, 20]
+        },
+        {
+            "name": "Etherine",
+            "type": "Mineral",
+            "description": "Etherine is a rare mineral that resonates with magical energy. It promotes mental clarity but may induce isolation.",
+            "rarity": "Rare",
+            "imagePath": "/images/Minerals/Etherine.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Serenite",
+            "type": "Mineral",
+            "description": "Serenite is a calming mineral often used in meditation. It brings serenity but may lead to disappointment.",
+            "rarity": "Common",
+            "imagePath": "/images/Minerals/Serenite.png",
+            "successRate": 90,
+            "priceRange": [1, 20]
+        },
+        {
+            "name": "Umbrestone",
+            "type": "Mineral",
+            "description": "Umbrestone is a mysterious mineral that seems to absorb light. It enhances empathy but may induce isolation.",
+            "rarity": "Rare",
+            "imagePath": "/images/Minerals/Umbrestone.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Prismalite",
+            "type": "Mineral",
+            "description": "Prismalite is a rare crystal that refracts light into a spectrum of colors. It promotes harmony but may induce disappointment.",
+            "rarity": "Uncommon",
+            "imagePath": "/images/Minerals/Prismalite.png",
+            "successRate": 80,
+            "priceRange": [21, 60]
+        },
+        {
+            "name": "Nebulorite",
+            "type": "Mineral",
+            "description": "Nebulorite is a cloudy mineral often found in mist-covered valleys. It brings mental clarity but may induce stress.",
+            "rarity": "Uncommon",
+            "imagePath": "/images/Minerals/Nebulorite.png",
+            "successRate": 80,
+            "priceRange": [21, 60]
+        },
+        {
+            "name": "Asteride",
+            "type": "Mineral",
+            "description": "Asteride is a rare mineral with star-like patterns. It enhances trust but may lead to disappointment.",
+            "rarity": "Epic",
+            "imagePath": "/images/Minerals/Asteride.png",
+            "successRate": 45,
+            "priceRange": [181, 350]
+        },
+        {
+            "name": "Chorumine",
+            "type": "Mineral",
+            "description": "Chorumine is a mineral with a mesmerizing swirling pattern. It promotes harmony but may induce isolation.",
+            "rarity": "Rare",
+            "imagePath": "/images/Minerals/Chorumine.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Aquarine",
+            "type": "Mineral",
+            "description": "Aquarine is a gemstone with a calming blue hue. It brings serenity but may lead to disappointment.",
+            "rarity": "Rare",
+            "imagePath": "/images/Minerals/Aquarine.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Prismarque",
+            "type": "Mineral",
+            "description": "Prismarque is a rare crystal with intricate geometric patterns. It promotes mental clarity but may induce isolation.",
+            "rarity": "Uncommon",
+            "imagePath": "/images/Minerals/Prismarque.png",
+            "successRate": 80,
+            "priceRange": [21, 60]
+        },
+        {
+            "name": "Abyssium",
+            "type": "Mineral",
+            "description": "Abyssium is a dark mineral found deep beneath the earth's surface. It enhances vitality but may lead to anger issues.",
+            "rarity": "Epic",
+            "imagePath": "/images/Minerals/Abyssium.png",
+            "successRate": 45,
+            "priceRange": [181, 350]
+        },
+        {
+            "name": "Arcanite",
+            "type": "Mineral",
+            "description": "Arcanite is a legendary mineral said to contain magical properties. It enhances trust but may lead to disappointment.",
+            "rarity": "Epic",
+            "imagePath": "/images/Minerals/Arcanite.png",
+            "successRate": 45,
+            "priceRange": [181, 350]
+        },
+        {
+            "name": "Chantefeuille",
+            "type": "Vegetal",
+            "description": "Chantefeuille is a vibrant green herb found in lush forests. It promotes harmony and empathy.",
+            "rarity": "Uncommon",
+            "imagePath": "/images/Vegetals/Chantefeuille.png",
+            "successRate": 80,
+            "priceRange": [21, 60]
+        },
+        {
+            "name": "Charmevelour",
+            "type": "Vegetal",
+            "description": "Charmevelour leaves are known for their soothing properties. They bring mental peace but can also cause disappointment.",
+            "rarity": "Rare",
+            "imagePath": "/images/Vegetals/Charmevelour.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Roseliane",
+            "type": "Vegetal",
+            "description": "Roseliane petals are prized for their sweet fragrance. They bring serenity but may lead to disappointment.",
+            "rarity": "Common",
+            "imagePath": "/images/Vegetals/Roseliane.png",
+            "successRate": 90,
+            "priceRange": [1, 20]
+        },
+        {
+            "name": "Brumea",
+            "type": "Vegetal",
+            "description": "Brumea is a rare herb found only in misty valleys. It enhances mental clarity but may induce stress.",
+            "rarity": "Rare",
+            "imagePath": "/images/Vegetals/Brumea.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Linette",
+            "type": "Vegetal",
+            "description": "Linette seeds are known for their calming properties. They bring serenity but may lead to disappointment.",
+            "rarity": "Uncommon",
+            "imagePath": "/images/Vegetals/Linette.png",
+            "successRate": 80,
+            "priceRange": [21, 60]
+        },
+        {
+            "name": "Herbine",
+            "type": "Vegetal",
+            "description": "Herbine is a versatile herb used in various potions. It enhances trust but may induce isolation.",
+            "rarity": "Common",
+            "imagePath": "/images/Vegetals/Herbine.png",
+            "successRate": 90,
+            "priceRange": [1, 20]
+        },
+        {
+            "name": "Verdane",
+            "type": "Vegetal",
+            "description": "Verdane leaves are known for their vibrant green color. They bring vitality but may induce stress.",
+            "rarity": "Common",
+            "imagePath": "/images/Vegetals/Verdane.png",
+            "successRate": 90,
+            "priceRange": [1, 20]
+        },
+        {
+            "name": "Tourneline",
+            "type": "Vegetal",
+            "description": "Tourneline is a rare herb known for its healing properties. It enhances empathy but may induce isolation.",
+            "rarity": "Rare",
+            "imagePath": "/images/Vegetals/Tourneline.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Selaine",
+            "type": "Vegetal",
+            "description": "Selaine is a delicate herb often used in love potions. It enhances trust but may lead to disappointment.",
+            "rarity": "Common",
+            "imagePath": "/images/Vegetals/Selaine.png",
+            "successRate": 90,
+            "priceRange": [1, 20]
+        },
+        {
+            "name": "Orfeu",
+            "type": "Vegetal",
+            "description": "Orfeu petals are known for their mesmerizing fragrance. They bring serenity but may lead to disappointment.",
+            "rarity": "Rare",
+            "imagePath": "/images/Vegetals/Orfeu.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Sylvea",
+            "type": "Vegetal",
+            "description": "Sylvea leaves are said to contain the essence of the forest. They promote harmony but may induce isolation.",
+            "rarity": "Uncommon",
+            "imagePath": "/images/Vegetals/Sylvea.png",
+            "successRate": 80,
+            "priceRange": [21, 60]
+        },
+        {
+            "name": "Florée",
+            "type": "Vegetal",
+            "description": "Florée petals are prized for their delicate fragrance. They bring mental clarity but may induce stress.",
+            "rarity": "Rare",
+            "imagePath": "/images/Vegetals/Floree.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Lichenia",
+            "type": "Vegetal",
+            "description": "Lichenia is a hardy plant that thrives in harsh environments. It enhances vitality but may induce isolation.",
+            "rarity": "Common",
+            "imagePath": "/images/Vegetals/Lichenia.png",
+            "successRate": 90,
+            "priceRange": [1, 20]
+        },
+        {
+            "name": "Aromine",
+            "type": "Vegetal",
+            "description": "Aromine is a rare herb prized for its calming aroma. It brings serenity but may lead to disappointment.",
+            "rarity": "Rare",
+            "imagePath": "/images/Vegetals/Aromine.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Brisetoile",
+            "type": "Vegetal",
+            "description": "Brisetoile is a vibrant green herb known for its healing properties. It enhances empathy but may induce isolation.",
+            "rarity": "Epic",
+            "imagePath": "/images/Vegetals/Brisetoile.png",
+            "successRate": 45,
+            "priceRange": [181, 350]
+        },
+        {
+            "name": "Verdargent",
+            "type": "Vegetal",
+            "description": "Verdargent leaves shimmer like silver in moonlight. They bring vitality but may induce stress.",
+            "rarity": "Uncommon",
+            "imagePath": "/images/Vegetals/Verdargent.png",
+            "successRate": 80,
+            "priceRange": [21, 60]
+        },
+        {
+            "name": "Lineriane",
+            "type": "Vegetal",
+            "description": "Lineriane is a delicate vine known for its healing properties. It promotes harmony but may induce isolation.",
+            "rarity": "Rare",
+            "imagePath": "/images/Vegetals/Lineriane.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Sylvestrine",
+            "type": "Vegetal",
+            "description": "Sylvestrine leaves rustle softly in the wind. They bring mental clarity but may induce stress.",
+            "rarity": "Rare",
+            "imagePath": "/images/Vegetals/Sylvestrine.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Treflune",
+            "type": "Vegetal",
+            "description": "Treflune is a small herb often found in shaded areas. It enhances trust but may lead to disappointment.",
+            "rarity": "Common",
+            "imagePath": "/images/Vegetals/Treflune.png",
+            "successRate": 90,
+            "priceRange": [1, 20]
+        },
+        {
+            "name": "Orepine",
+            "type": "Vegetal",
+            "description": "Orepine leaves are known for their golden hue. They bring serenity but may lead to disappointment.",
+            "rarity": "Common",
+            "imagePath": "/images/Vegetals/Orepine.png",
+            "successRate": 90,
+            "priceRange": [1, 20]
+        },
+        {
+            "name": "Grinfir Oil",
+            "type": "Animal",
+            "description": "Grinfir Oil is extracted from the glands of the Grinfir beast. It enhances vitality but may induce anger.",
+            "rarity": "Uncommon",
+            "imagePath": "/images/Animals/Grinfir_Oil.png",
+            "successRate": 80,
+            "priceRange": [21, 60]
+        },
+        {
+            "name": "Sylvur Scale",
+            "type": "Animal",
+            "description": "Sylvur Scales are known for their resilience. They enhance trust but may lead to disappointment.",
+            "rarity": "Rare",
+            "imagePath": "/images/Animals/Sylvur_Scale.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Aurinax Wing",
+            "type": "Animal",
+            "description": "The majestic Aurinax Wing is revered for its rarity. It brings prosperity but may lead to disappointment.",
+            "rarity": "Rare",
+            "imagePath": "/images/Animals/Aurinax_Wing.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Cheledon hair",
+            "type": "Animal",
+            "description": "Cheledon hair is known for its vibrant color. It brings trust but may also induce isolation.",
+            "rarity": "Common",
+            "imagePath": "/images/Animals/Cheledon_Hair.png",
+            "successRate": 90,
+            "priceRange": [1, 20]
+        },
+        {
+            "name": "Lunaris Antenna",
+            "type": "Animal",
+            "description": "Lunaris Antenna is a delicate appendage from the mystical Lunaris creature. It enhances trust but may lead to disappointment.",
+            "rarity": "Epic",
+            "imagePath": "/images/Animals/Lunaris_Antenna.png",
+            "successRate": 45,
+            "priceRange": [181, 350]
+        },
+        {
+            "name": "Beak of Vydorius",
+            "type": "Animal",
+            "description": "Beak of Vydorius is a sharp beak from the legendary Vydorius bird. It enhances vitality but may induce stress.",
+            "rarity": "Rare",
+            "imagePath": "/images/Animals/Beak_Of_Vydorius.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Noctiferous Mane",
+            "type": "Animal",
+            "description": "Noctiferous Mane is a mane from the elusive Noctiferous creature. It brings serenity but may lead to disappointment.",
+            "rarity": "Common",
+            "imagePath": "/images/Animals/Noctiferous_Mane.png",
+            "successRate": 90,
+            "priceRange": [1, 20]
+        },
+        {
+            "name": "Zephyrid Fin",
+            "type": "Animal",
+            "description": "Zephyrid Fin is a fin from the swift Zephyrid creature. It enhances mental clarity but may induce stress.",
+            "rarity": "Uncommon",
+            "imagePath": "/images/Animals/Zephyrid_Fin.png",
+            "successRate": 80,
+            "priceRange": [21, 60]
+        },
+        {
+            "name": "Brumalis Tail",
+            "type": "Animal",
+            "description": "Brumalis Tail is a fluffy tail from the Brumalis creature. It enhances empathy but may induce isolation.",
+            "rarity": "Rare",
+            "imagePath": "/images/Animals/Brumalis_Tail.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Ardorix Carapace",
+            "type": "Animal",
+            "description": "Ardorix Carapace is a tough shell from the fiery Ardorix creature. It enhances trust but may lead to disappointment.",
+            "rarity": "Common",
+            "imagePath": "/images/Animals/Ardorix_Carapace.png",
+            "successRate": 90,
+            "priceRange": [1, 20]
+        },
+        {
+            "name": "Ameris Eggs",
+            "type": "Animal",
+            "description": "Ameris Eggs are prized for their vibrant color. They enhance trust but may lead to disappointment.",
+            "rarity": "Uncommon",
+            "imagePath": "/images/Animals/Ameris_Eggs.png",
+            "successRate": 80,
+            "priceRange": [21, 60]
+        },
+        {
+            "name": "Panavius Claw",
+            "type": "Animal",
+            "description": "Panavius Claw is a rare artifact from the Panavius creature. It brings prosperity but may lead to disappointment.",
+            "rarity": "Epic",
+            "imagePath": "/images/Animals/Panavius_Claw.png",
+            "successRate": 45,
+            "priceRange": [181, 350]
+        },
+        {
+            "name": "Cerulice's Horn",
+            "type": "Animal",
+            "description": "Cerulice's Horn is a legendary horn with mystical properties. It enhances mental clarity but may induce stress.",
+            "rarity": "Rare",
+            "imagePath": "/images/Animals/Cerulice_Horn.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Paondoia Feather",
+            "type": "Animal",
+            "description": "Paondoia Feather is a feather from the majestic Paondoia bird. It brings serenity but may lead to disappointment.",
+            "rarity": "Common",
+            "imagePath": "/images/Animals/Paondoia_Feather.png",
+            "successRate": 90,
+            "priceRange": [1, 20]
+        },
+        {
+            "name": "Luminor Tongue",
+            "type": "Animal",
+            "description": "Luminor Tongue is a unique communication method of the Luminor creature. It enhances empathy but may induce isolation.",
+            "rarity": "Rare",
+            "imagePath": "/images/Animals/Luminor_Tongue.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Everis Tentacle",
+            "type": "Animal",
+            "description": "Everis Tentacle is a resilient tentacle from the Everis creature. It enhances vitality but may induce stress.",
+            "rarity": "Rare",
+            "imagePath": "/images/Animals/Everis_Tentacle.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Astralis Thorn",
+            "type": "Animal",
+            "description": "Astralis Thorn is a sharp thorn from the Astralis plant. It enhances mental clarity but may induce stress.",
+            "rarity": "Common",
+            "imagePath": "/images/Animals/Astralis_Thorn.png",
+            "successRate": 90,
+            "priceRange": [1, 20]
+        },
+        {
+            "name": "Opalir Tail",
+            "type": "Animal",
+            "description": "Opalir Tail is a shimmering tail from the Opalir creature. It enhances empathy but may induce isolation.",
+            "rarity": "Rare",
+            "imagePath": "/images/Animals/Opalir_Tail.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Heart of Mystix",
+            "type": "Animal",
+            "description": "Heart of Mystix is a legendary artifact from the Mystix creature. It brings serenity but may lead to disappointment.",
+            "rarity": "Epic",
+            "imagePath": "/images/Animals/Heart_Of_Mystix.png",
+            "successRate": 45,
+            "priceRange": [181, 350]
+        },
+        {
+            "name": "Claw_Of_Ensolvurax",
+            "type": "Animal",
+            "description": "The Claw of Ensolvurax is a formidable weapon from the ancient Ensolvurax creature. It bestows power but may incite fear.",
+            "rarity": "Rare",
+            "imagePath": "/images/Animals/Claw_Of_Ensolvurax.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Frost Trumpet",
+            "type": "Mushroom",
+            "description": "Frost Trumpet is a rare mushroom that thrives in cold climates. It enhances vitality but may induce stress.",
+            "rarity": "Rare",
+            "imagePath": "/images/Mushrooms/Frost_Trumpet.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Moonlight",
+            "type": "Mushroom",
+            "description": "Moonlight mushrooms glow softly in the dark. They bring serenity but may lead to disappointment.",
+            "rarity": "Rare",
+            "imagePath": "/images/Mushrooms/Moonlight.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Aether Glow",
+            "type": "Mushroom",
+            "description": "Aether Glow is a rare mushroom with a vibrant green hue. It promotes harmony but may induce isolation.",
+            "rarity": "Common",
+            "imagePath": "/images/Mushrooms/Aether_Glow.png",
+            "successRate": 90,
+            "priceRange": [1, 20]
+        },
+        {
+            "name": "Dew Hat",
+            "type": "Mushroom",
+            "description": "Dew Hat is a mushroom often found in damp forests. It enhances empathy but may induce isolation.",
+            "rarity": "Rare",
+            "imagePath": "/images/Mushrooms/Dew_Hat.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Milky Fur",
+            "type": "Mushroom",
+            "description": "Milky Fur is a mushroom that emits a gentle glow resembling starlight. It brings serenity but may induce disappointment.",
+            "rarity": "Rare",
+            "imagePath": "/images/Mushrooms/Milky_Fur.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Sylver Truffle",
+            "type": "Mushroom",
+            "description": "Sylver Truffle is a rare mushroom with a delicate flavor. It promotes harmony but may induce isolation.",
+            "rarity": "Uncommon",
+            "imagePath": "/images/Mushrooms/Sylver_Truffle.png",
+            "successRate": 80,
+            "priceRange": [21, 60]
+        },
+        {
+            "name": "Mist Cymbal",
+            "type": "Mushroom",
+            "description": "Mist Cymbal is a mushroom that emits a faint mist. It enhances trust but may lead to disappointment.",
+            "rarity": "Common",
+            "imagePath": "/images/Mushrooms/Mist_Cymbal.png",
+            "successRate": 90,
+            "priceRange": [1, 20]
+        },
+        {
+            "name": "Golden Sporea",
+            "type": "Mushroom",
+            "description": "Golden Sporea is a mushroom that glows softly in the moonlight. It enhances mental clarity but may induce stress.",
+            "rarity": "Rare",
+            "imagePath": "/images/Mushrooms/Golden_Sporea.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Night Chanterelle",
+            "type": "Mushroom",
+            "description": "Night Chanterelle is a mushroom that only blooms under the cover of darkness. It brings serenity but may induce disappointment.",
+            "rarity": "Common",
+            "imagePath": "/images/Mushrooms/Night_Chanterelle.png",
+            "successRate": 90,
+            "priceRange": [1, 20]
+        },
+        {
+            "name": "Opal Dawn",
+            "type": "Mushroom",
+            "description": "Opal Dawn is a mushroom that emits a soft glow at dawn. It enhances empathy but may induce isolation.",
+            "rarity": "Uncommon",
+            "imagePath": "/images/Mushrooms/Opal_Dawn.png",
+            "successRate": 80,
+            "priceRange": [21, 60]
+        },
+        {
+            "name": "Ivory Truffle",
+            "type": "Mushroom",
+            "description": "Ivory Truffle is a mushroom that resembles a fluffy cloud. It enhances vitality but may induce stress.",
+            "rarity": "Rare",
+            "imagePath": "/images/Mushrooms/Ivory_Truffle.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Silver horns",
+            "type": "Mushroom",
+            "description": "Silver horns is a mushroom with a metallic sheen. It brings trust but may lead to disappointment.",
+            "rarity": "Common",
+            "imagePath": "/images/Mushrooms/Silver_Horns.png",
+            "successRate": 90,
+            "priceRange": [1, 20]
+        },
+        {
+            "name": "Twilight Mount",
+            "type": "Mushroom",
+            "description": "Twilight Mount is a fragment of a larger mushroom crystal. It promotes harmony but may induce isolation.",
+            "rarity": "Uncommon",
+            "imagePath": "/images/Mushrooms/Twilight_Mount.png",
+            "successRate": 80,
+            "priceRange": [21, 60]
+        },
+        {
+            "name": "Sylvechant",
+            "type": "Mushroom",
+            "description": "Sylvechant is a mushroom with healing properties. It enhances empathy but may induce isolation.",
+            "rarity": "Epic",
+            "imagePath": "/images/Mushrooms/Sylvechant.png",
+            "successRate": 45,
+            "priceRange": [181, 350]
+        },
+        {
+            "name": "Misty Helmet",
+            "type": "Mushroom",
+            "description": "Misty Helmet is a mushroom that resembles the sky at dawn. It brings serenity but may induce disappointment.",
+            "rarity": "Common",
+            "imagePath": "/images/Mushrooms/Misty_Helmet.png",
+            "successRate": 90,
+            "priceRange": [1, 20]
+        },
+        {
+            "name": "Pearly Dome",
+            "type": "Mushroom",
+            "description": "Pearly Dome is a mushroom with a celestial pattern. It enhances mental clarity but may induce stress.",
+            "rarity": "Rare",
+            "imagePath": "/images/Mushrooms/Pearly_Dome.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Silent Ember",
+            "type": "Mushroom",
+            "description": "Silent Ember is a mushroom that emits a soft and silent glow. It brings tranquility but may induce disappointment.",
+            "rarity": "Rare",
+            "imagePath": "/images/Mushrooms/Silent_Ember.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Crimson Veil",
+            "type": "Mushroom",
+            "description": "Crimson Veil is a mushroom of intense red that grows in dark forests. It brings vitality but may induce anger.",
+            "rarity": "Rare",
+            "imagePath": "/images/Mushrooms/Crimson_Veil.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        },
+        {
+            "name": "Ember Glow",
+            "type": "Mushroom",
+            "description": "Ember Glow is a luminous mushroom resembling a burning ember. It brings vitality but may induce fatigue.",
+            "rarity": "Uncommon",
+            "imagePath": "/images/Mushrooms/Ember_Glow.png",
+            "successRate": 80,
+            "priceRange": [21, 60]
+        },
+        {
+            "name": "Emberheart Toadstool",
+            "type": "Mushroom",
+            "description": "Emberheart Toadstool is a mushroom with a burning heart at its center. It brings love but may induce depression.",
+            "rarity": "Rare",
+            "imagePath": "/images/Mushrooms/Emberheart_Toadstool.png",
+            "successRate": 60,
+            "priceRange": [61, 180]
+        }
+]
+}
