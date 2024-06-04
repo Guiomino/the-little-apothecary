@@ -32,16 +32,14 @@ class Ingredient {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    // Calculer les prix aléatoires pour tous les ingrédients et les stocker dans le localStorage
+    // Calcul des prix aléatoires pour tous les ingrédients et les stocker dans localStorage
     static calculateAndStorePrices(ingredients: Ingredient[]): number[] {
         const storedPrices = localStorage.getItem('ingredientPrices');
         let prices: number[];
 
         if (storedPrices) {
-            // Si les prix existent dans le localStorage, les utiliser
             prices = JSON.parse(storedPrices);
         } else {
-            // Sinon, générer de nouveaux prix et les stocker
             prices = ingredients.map(ingredient =>
                 Ingredient.generateRandomPrice(ingredient.priceRange[0], ingredient.priceRange[1])
             );
@@ -51,7 +49,7 @@ class Ingredient {
         return prices;
     }
 
-    // Méthode pour vider le localStorage
+    // Vider le localStorage
     static clearStoredPrices(): void {
         localStorage.removeItem('ingredientPrices');
     }
