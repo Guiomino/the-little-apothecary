@@ -1,3 +1,5 @@
+// IngredientProvider.tsx
+
 "use client"
 
 import React, { ReactNode, createContext, useContext, useEffect, useState } from 'react';
@@ -53,10 +55,8 @@ const IngredientProvider: React.FC<IngredientProviderProps> = ({ children }) => 
 
     useEffect(() => {
         if (ingredients.length > 0) {
-            ingredients.forEach((ingredient) => {
-                saveToLocalStorage(`${ingredient.name}-successRate`, ingredient.successRate);
-                saveToLocalStorage(`${ingredient.name}-priceRange`, ingredient.priceRange);
-            });
+            const prices = Ingredient.calculateAndStorePrices(ingredients);
+            saveToLocalStorage('ingredientPrices', prices);
         }
     }, [ingredients]);
 

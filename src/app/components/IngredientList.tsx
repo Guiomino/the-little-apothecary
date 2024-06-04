@@ -14,12 +14,13 @@ const loadFromLocalStorage = (key: string) => {
 
 const IngredientList: React.FC = () => {
     const ingredients = useIngredients();
+    const prices = loadFromLocalStorage('ingredientPrices');
 
     return (
         <ul>
-            {ingredients.map((ingredient) => {
-                const successRate = loadFromLocalStorage(`${ingredient.name}-successRate`) || ingredient.successRate;
-                const priceRange = loadFromLocalStorage(`${ingredient.name}-priceRange`) || ingredient.priceRange;
+            {ingredients.map((ingredient, index) => {
+
+                const price = prices ? prices[index] : 'N/A';
 
                 return (
                     <li key={ingredient.name}>
@@ -27,9 +28,8 @@ const IngredientList: React.FC = () => {
                         <p><strong>Type : </strong>{ingredient.type}</p>
                         <p><strong>Description : </strong>{ingredient.description}</p>
                         <p><strong>Rarity : </strong>{ingredient.rarity}</p>
-                        <p><strong>Success rate : </strong>{successRate}%</p>
-                        <p><strong>Price range : </strong>{priceRange[0]} - {priceRange[1]}</p>
-                        <p><strong>Prix : </strong></p>
+                        <p><strong>Success rate : </strong>{ingredient.successRate}%</p>
+                        <p><strong>Prix : </strong>{price}</p>
                         <Image src={ingredient.imagePath} width={100} height={100} alt={ingredient.name} />
                     </li>
                 );
