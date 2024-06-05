@@ -2,11 +2,10 @@
 
 "use client"
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useIngredients } from '@/app/context/IngredientContext';
 
-// Fonction pour récupérer une valeur depuis localStorage
 const loadFromLocalStorage = (key: string) => {
     const value = localStorage.getItem(key);
     return value ? JSON.parse(value) : null;
@@ -14,13 +13,21 @@ const loadFromLocalStorage = (key: string) => {
 
 const IngredientList: React.FC = () => {
     const ingredients = useIngredients();
-    const prices = loadFromLocalStorage('ingredientPrices');
+    const [prices, setPrices] = useState<number[]>([]);
+
+    useEffect(() => {
+        const storedPrices = loadFromLocalStorage('ingredientPrices');
+        if (storedPrices) {
+            setPrices(storedPrices)
+        }
+    }, []);
 
     return (
         <ul>
             {ingredients.map((ingredient, index) => {
 
                 const price = prices ? prices[index] : 'N/A';
+                const isPriority = index < 5;
 
                 return (
                     <li key={ingredient.name}>
@@ -30,7 +37,7 @@ const IngredientList: React.FC = () => {
                         <p><strong>Rarity : </strong>{ingredient.rarity}</p>
                         <p><strong>Success rate : </strong>{ingredient.successRate}%</p>
                         <p><strong>Prix : </strong>{price}</p>
-                        <Image src={ingredient.imagePath} width={100} height={100} alt={ingredient.name} />
+                        <Image src={ingredient.imagePath} width={40} height={40} alt={ingredient.name} priority={isPriority} />
                     </li>
                 );
             })}
