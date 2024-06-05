@@ -3,11 +3,12 @@
 "use client"
 
 import React from 'react';
+import styles from "@/app/miscellaneous/miscellaneous.module.scss"
 
 const LevelUser: React.FC = () => {
   return (
     <>
-      <p><strong>Level : </strong>1</p>
+      <p className={styles.lvlSection}><strong>⬆ Lvl : </strong>1</p>
     </>
   );
 };

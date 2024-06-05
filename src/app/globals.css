@@ -29,3 +29,8 @@ p {
 span {
   color: red;
 }
+
+button {
+  cursor: pointer;
+  color: #fff;
+}

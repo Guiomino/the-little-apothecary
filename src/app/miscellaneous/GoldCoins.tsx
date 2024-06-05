@@ -3,6 +3,7 @@
 "use client"
 
 import React from 'react';
+import styles from "@/app/miscellaneous/miscellaneous.module.scss"
 
 interface GoldCoinsProps {
   goldCoins: number;
@@ -11,7 +12,7 @@ interface GoldCoinsProps {
 const GoldCoins: React.FC<GoldCoinsProps> = ({ goldCoins }) => {
   return (
     <>
-      <p><strong>Gold Coins : </strong>{goldCoins}</p>
+      <p className={styles.goldSection}><strong>🪙 </strong>{goldCoins}</p>
     </>
   );
 };

@@ -3,6 +3,7 @@
 "use client"
 
 import React from 'react';
+import styles from "@/app/miscellaneous/miscellaneous.module.scss"
 
 const CloseModal: React.FC = () => {
   const handleClose = () => {
@@ -10,7 +11,7 @@ const CloseModal: React.FC = () => {
   };
 
   return (
-    <button onClick={handleClose}>Close</button>
+    <button className={styles.closeButton} onClick={handleClose}>Close</button>
   );
 };
 
