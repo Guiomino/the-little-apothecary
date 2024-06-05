@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <IngredientProvider>
-        <main className={styles.app}>
+        <main className={styles.mainPage}>
           <h1>The Little Apothecary</h1>
           <Market />
           <IngredientList />

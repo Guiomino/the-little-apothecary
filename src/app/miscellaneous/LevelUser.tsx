@@ -6,9 +6,9 @@ import React from 'react';
 
 const LevelUser: React.FC = () => {
   return (
-    <div>
-      Level: 1
-    </div>
+    <>
+      <p><strong>Level : </strong>1</p>
+    </>
   );
 };
 

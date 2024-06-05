@@ -6,13 +6,11 @@ import React from 'react';
 
 const CloseModal: React.FC = () => {
   const handleClose = () => {
-    // Implement the logic to close the modal
+    // logic to close modal
   };
 
   return (
-    <button onClick={handleClose}>
-      Close
-    </button>
+    <button onClick={handleClose}>Close</button>
   );
 };
 

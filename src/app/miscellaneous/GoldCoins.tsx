@@ -10,9 +10,9 @@ interface GoldCoinsProps {
 
 const GoldCoins: React.FC<GoldCoinsProps> = ({ goldCoins }) => {
   return (
-    <div>
-      Gold Coins: {goldCoins}
-    </div>
+    <>
+      <p><strong>Gold Coins : </strong>{goldCoins}</p>
+    </>
   );
 };
 

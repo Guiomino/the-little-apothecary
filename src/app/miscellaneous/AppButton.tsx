@@ -11,9 +11,7 @@ interface AppButtonProps {
 
 const AppButton: React.FC<AppButtonProps> = ({ label, onClick }) => {
   return (
-    <button onClick={onClick}>
-      {label}
-    </button>
+    <button onClick={onClick}>{label}</button>
   );
 };
 

@@ -6,9 +6,9 @@ import React from 'react';
 
 const CartList: React.FC = () => {
   return (
-    <div>
-      Cart List
-    </div>
+    <>
+      <p>Cart List</p>
+    </>
   );
 };
 

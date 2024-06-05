@@ -6,9 +6,9 @@ import React from 'react';
 
 const CartQuantity: React.FC = () => {
   return (
-    <div>
-      Cart Quantity: 0
-    </div>
+    <>
+      <p><strong>Cart Quantity :</strong> 0</p>
+    </>
   );
 };
 

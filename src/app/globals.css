@@ -6,3 +6,26 @@
   padding: 0;
   scroll-behavior: smooth;
 }
+
+
+/* POLICE */
+h1 {
+  color: #5d00ff;
+  text-align: center;
+  font-size: 22px;
+  text-transform: uppercase;
+  padding: 10px;
+}
+
+h2 {
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+p {
+  font-size: 14px;
+}
+
+span {
+  color: red;
+}

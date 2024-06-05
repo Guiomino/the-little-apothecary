@@ -6,9 +6,7 @@ import React from 'react';
 
 const FilterIngredients: React.FC = () => {
   return (
-    <button>
-      Filter Ingredients
-    </button>
+    <button>Filter Ingredients</button>
   );
 };
 

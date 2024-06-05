@@ -16,17 +16,18 @@ const IngredientsList: React.FC = () => {
   };
 
   return (
-    <div>
-      <div>Ingredients List</div>
+    <>
+      <h2>Ingredients List</h2>
+      {/* Liste ici */}
       <div>
-        Quantity: {quantity}
+        <p><strong>Quantity : </strong>{quantity}</p>
         <button onClick={() => decrement()}>-</button>
         <button onClick={() => increment(1)}>+</button>
         <button onClick={() => increment(1)}>x1</button>
         <button onClick={() => increment(10)}>x10</button>
         <button onClick={() => increment(100)}>x100</button>
       </div>
-    </div>
+    </>
   );
 };
 
