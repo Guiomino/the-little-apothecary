@@ -37,7 +37,7 @@ class Ingredient {
         const storedPrices = localStorage.getItem('ingredientPrices');
         let prices: number[];
 
-        if (storedPrices) {
+        if (storedPrices && JSON.parse(storedPrices).length > 0) {
             prices = JSON.parse(storedPrices);
         } else {
             prices = ingredients.map(ingredient =>

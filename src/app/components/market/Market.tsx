@@ -14,7 +14,7 @@ import CartList from '@/app/components/market/CartList';
 import AppButton from '@/app/miscellaneous/AppButton';
 import styles from "@/app/components/market/market.module.scss"
 
-const Market: React.FC = () => {
+const Market: React.FC = ( { onCloseClick }: { onCloseclick: () => void }) => {
     const [goldCoins, setGoldCoins] = useState(5000);
 
     return (
@@ -25,7 +25,7 @@ const Market: React.FC = () => {
                     <GoldCoins goldCoins={goldCoins} />
                     <h2>Market</h2>
                     <LevelUser />
-                    <CloseModal />
+                    <CloseModal onClick={onCloseClick}/>
                 </div>
                 <div className={`${styles.list} ${styles.filter} ${styles.details}`}>
                     <IngredientsList />
