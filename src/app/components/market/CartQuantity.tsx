@@ -3,11 +3,14 @@
 "use client"
 
 import React from 'react';
+import styles from "@/app/components/market/market.module.scss"
 
 const CartQuantity: React.FC = () => {
   return (
     <>
-      <p><strong>Cart Quantity :</strong> 0</p>
+      <div className={styles.cart}>
+        <p><strong>Quantity : </strong>0</p>
+      </div>
     </>
   );
 };

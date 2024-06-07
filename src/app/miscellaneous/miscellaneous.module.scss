@@ -12,12 +12,16 @@
   height: 100%;
 }
 
-#ingredientsContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+.openModalButton {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #bb00ff;
+  border-radius: 5px;
+  background-color: #333;
+  transition: 0.2s;
+  box-shadow: 0px 0px 20px transparent;
 
-.ingredient {
-  display: flex;
+  &:hover {
+    box-shadow: 0px 0px 20px #bb00ff;
+  }
 }

@@ -3,6 +3,7 @@
 "use client"
 
 import React from 'react';
+import styles from "@/app/miscellaneous/miscellaneous.module.scss"
 
 interface OpenModalButtonProps {
   label?: string;
@@ -11,7 +12,7 @@ interface OpenModalButtonProps {
 
 const OpenModalButton: React.FC<OpenModalButtonProps> = ({ label, onClick }) => {
   return (
-    <button onClick={onClick}>{label}</button>
+    <button className={styles.openModalButton} onClick={onClick}>{label}</button>
   );
 };
 

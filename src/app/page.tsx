@@ -1,12 +1,12 @@
+// pages.tsx
+
 "use client"
 
-import Image from "next/image";
 import styles from "./page.module.scss";
 import IngredientProvider from "./context/IngredientContext";
 import Market from "./components/market/Market";
-import IngredientList from "./components/IngredientList";
 import { useState } from "react";
-import OpenModalButton from "./miscellaneous/openModalButton";
+import OpenModalButton from "@/app/miscellaneous/OpenModalButton";
 
 export default function Home() {
 
@@ -19,16 +19,17 @@ export default function Home() {
       <IngredientProvider>
         <main className={styles.mainPage}>
           <h1>The Little Apothecary</h1>
-          <OpenModalButton onClick={modalButtonHandler} />
+          <div className={styles.OpenModalButton}>
+            <OpenModalButton onClick={modalButtonHandler} label="🧺" />
+          </div>
           {
             isdisplayed && (
               <>
-              <Market onCloseClick={modalCloseHandler} />
-          <IngredientList />
+                <Market onCloseClick={modalCloseHandler} />
               </>
             )
           }
-          
+
         </main>
       </IngredientProvider>
     </>
