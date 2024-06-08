@@ -3,7 +3,23 @@
   width: 100%;
   height: 100%;
   border: none;
-  background-color: #f70180;
+  transition: 0.3s;
+}
+
+.closeButton {
+  background-color: #ff0084;
+  
+  &:hover {
+    background-color: #ff7cc0;
+  }
+}
+
+.filterButton {
+  background-color: #ff9900;
+
+  &:hover {
+    background-color: #ffc977;
+  }
 }
 
 .lvlSection p,

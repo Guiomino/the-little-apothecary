@@ -1,4 +1,4 @@
-// IngredientProvider.tsx
+// IngredientContext.tsx
 
 "use client"
 
@@ -25,17 +25,49 @@ const saveToLocalStorage = (key: string, value: any) => {
     localStorage.setItem(key, JSON.stringify(value));
 };
 
-const loadFromLocalStorage = (key: string) => {
+export const loadFromLocalStorage = (key: string) => {
     const value = localStorage.getItem(key);
     return value ? JSON.parse(value) : null;
 };
 
-const IngredientContext = createContext<Ingredient[]>([]);
+interface IngredientContextType {
+    ingredients: Ingredient[];
+    totalQuantity: number;
+    setTotalQuantity: React.Dispatch<React.SetStateAction<number>>;
+    totalPrice: number;
+    setTotalPrice: React.Dispatch<React.SetStateAction<number>>;
+};
 
-export const useIngredients = () => useContext(IngredientContext);
+const IngredientContext = createContext<IngredientContextType | undefined>(undefined);
+
+export const useIngredients = () => {
+    const context = useContext(IngredientContext);
+    if (!context) {
+        throw new Error('useIngredients must be used within an IngredientProvider');
+    }
+    return context.ingredients;
+};
+
+export const useTotalQuantity = () => {
+    const context = useContext(IngredientContext);
+    if (!context) {
+        throw new Error('useTotalQuantity must be used within an IngredientProvider');
+    }
+    return [context.totalQuantity, context.setTotalQuantity] as const;
+};
+
+export const useTotalPrice = (() => {
+    const context = useContext(IngredientContext)
+    if (!context) {
+        throw new Error('useTotalPrice must be used within an IngredientProvider');
+    }
+    return [context.totalPrice, context.setTotalPrice] as const;
+});
 
 const IngredientProvider: React.FC<IngredientProviderProps> = ({ children }) => {
     const [ingredients, setIngredients] = useState<Ingredient[]>([]);
+    const [totalQuantity, setTotalQuantity] = useState(0);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
         // Chargement des données d'ingrédients à partir du fichier JSON importé
@@ -61,7 +93,7 @@ const IngredientProvider: React.FC<IngredientProviderProps> = ({ children }) => 
     }, [ingredients]);
 
     return (
-        <IngredientContext.Provider value={ingredients}>
+        <IngredientContext.Provider value={{ ingredients, totalQuantity, setTotalQuantity, totalPrice, setTotalPrice }}>
             {children}
         </IngredientContext.Provider>
     );

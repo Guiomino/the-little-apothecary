@@ -1,5 +1,7 @@
+// IngredientsList.tsx
+
 import React, { useState, useEffect } from 'react';
-import { useIngredients } from '../context/IngredientContext';
+import { useIngredients, useTotalPrice, useTotalQuantity } from '../context/IngredientContext';
 import IngredientClass from "@/app/OOP/IngredientClass";
 import styles from "./ingredient.module.scss";
 import Image from 'next/image';
@@ -12,6 +14,8 @@ const loadFromLocalStorage = (key: string) => {
 const IngredientsList: React.FC = () => {
   const ingredients = useIngredients();
   const [quantities, setQuantities] = useState<number[]>([]);
+  const [totalQuantity, setTotalQuantity] = useTotalQuantity();
+  const [totalPrice, setTotalPrice] = useTotalPrice();
   const [prices, setPrices] = useState<number[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -31,6 +35,14 @@ const IngredientsList: React.FC = () => {
     setQuantities(initialQuantities);
     setLoading(false);
   }, [ingredients]);
+
+  useEffect(() => {
+    const total = quantities.reduce((sum, quantity) => sum + quantity, 0);
+    setTotalQuantity(total);
+
+    const totalPrice = quantities.reduce((sum, quantity, index) => sum + (quantity * prices[index]), 0);
+    setTotalPrice(totalPrice);
+  }, [quantities, prices, setTotalQuantity, setTotalPrice]);
 
   const increment = (index: number, amount: number) => {
     setQuantities(prev => {
@@ -127,10 +139,10 @@ const IngredientsList: React.FC = () => {
 
             <div className={styles.ingrHandle}>
               <div className={styles.counter}>
-                <button onClick={() => increment(index, 1)}>+1</button>
-                <button onClick={() => increment(index, -1)}>-1</button>
-                <button onClick={() => increment(index, 10)}>+10</button>
                 <button onClick={() => increment(index, -10)}>-10</button>
+                <button onClick={() => increment(index, -1)}>-1</button>
+                <button onClick={() => increment(index, 1)}><strong>+1</strong></button>
+                <button onClick={() => increment(index, 10)}><strong>+10</strong></button>
                 <button onClick={() => resetCounter(index)}>Reset</button>
               </div>
 
