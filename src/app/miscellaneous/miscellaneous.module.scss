@@ -8,7 +8,7 @@
 
 .closeButton {
   background-color: #ff0084;
-  
+
   &:hover {
     background-color: #ff7cc0;
   }
@@ -22,8 +22,16 @@
   }
 }
 
-.lvlSection p,
-.goldSection p {
+.goldSection,
+.lvlSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.goldSection p,
+.lvlSection p {
   width: 100%;
   height: 100%;
 }

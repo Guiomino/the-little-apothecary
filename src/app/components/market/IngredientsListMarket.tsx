@@ -1,7 +1,8 @@
-// IngredientsList.tsx
+// IngredientsListMarket.tsx
+"use client"
 
 import React, { useState, useEffect } from 'react';
-import { useIngredients, useTotalPrice, useTotalQuantity } from '../context/IngredientContext';
+import { useCartItems, useIngredients, useTotalPrice, useTotalQuantity } from '@/app/context/IngredientContext';
 import IngredientClass from "@/app/OOP/IngredientClass";
 import styles from "./ingredient.module.scss";
 import Image from 'next/image';
@@ -11,11 +12,12 @@ const loadFromLocalStorage = (key: string) => {
   return value && JSON.parse(value).length > 0 ? JSON.parse(value) : null;
 };
 
-const IngredientsList: React.FC = () => {
+const IngredientsListMarket: React.FC = () => {
   const ingredients = useIngredients();
   const [quantities, setQuantities] = useState<number[]>([]);
   const [totalQuantity, setTotalQuantity] = useTotalQuantity();
   const [totalPrice, setTotalPrice] = useTotalPrice();
+  const [cartItems, setCartItems] = useCartItems();
   const [prices, setPrices] = useState<number[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -42,7 +44,13 @@ const IngredientsList: React.FC = () => {
 
     const totalPrice = quantities.reduce((sum, quantity, index) => sum + (quantity * prices[index]), 0);
     setTotalPrice(totalPrice);
-  }, [quantities, prices, setTotalQuantity, setTotalPrice]);
+
+    const updatedCartItems = ingredients.map((ingredient, index) => ({
+      ingredient,
+      quantity: quantities[index],
+    })).filter(item => item.quantity > 0);
+    setCartItems(updatedCartItems);
+  }, [quantities, prices, setTotalQuantity, setTotalPrice, ingredients, setCartItems]);
 
   const increment = (index: number, amount: number) => {
     setQuantities(prev => {
@@ -118,7 +126,7 @@ const IngredientsList: React.FC = () => {
       {ingredients.map((ingredient, index) => {
         const price = prices[index] !== undefined ? prices[index] : 'N/A';
         const isPriority = index < 5;
-        const rarityClass = getRarityClass(ingredient.rarity);
+        const rarityClass  = getRarityClass(ingredient.rarity);
         const typeImg = getTypeImg(ingredient.type);
         const rarityImg = getRarityImg(ingredient.rarity);
         const totalPrice = getTotalPrice(index);
@@ -166,4 +174,5 @@ const IngredientsList: React.FC = () => {
   );
 };
 
-export default IngredientsList;
+export default IngredientsListMarket;
+

@@ -4,6 +4,7 @@
 
 import React from 'react';
 import styles from "@/app/miscellaneous/miscellaneous.module.scss"
+import Image from 'next/image';
 
 interface GoldCoinsProps {
   goldCoins: number;
@@ -12,7 +13,7 @@ interface GoldCoinsProps {
 const GoldCoins: React.FC<GoldCoinsProps> = ({ goldCoins }) => {
   return (
     <>
-      <p className={styles.goldSection}><strong>🪙 </strong>{goldCoins}</p>
+      <p className={styles.goldSection}><Image src={"/images/Miscellaneous/Gold.png"} width={15} height={15} alt='Gold coin' />{goldCoins}</p>
     </>
   );
 };

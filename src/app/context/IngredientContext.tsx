@@ -36,6 +36,8 @@ interface IngredientContextType {
     setTotalQuantity: React.Dispatch<React.SetStateAction<number>>;
     totalPrice: number;
     setTotalPrice: React.Dispatch<React.SetStateAction<number>>;
+    cartItem: { ingredient: Ingredient; quantity: number }[];
+    setCartItem: React.Dispatch<React.SetStateAction<{ ingredient: Ingredient; quantity: number }[]>>;
 };
 
 const IngredientContext = createContext<IngredientContextType | undefined>(undefined);
@@ -64,10 +66,19 @@ export const useTotalPrice = (() => {
     return [context.totalPrice, context.setTotalPrice] as const;
 });
 
+export const useCartItems = (() => {
+    const context = useContext(IngredientContext)
+    if (!context) {
+        throw new Error('useTotalPrice must be used within an IngredientProvider');
+    }
+    return [context.cartItem, context.setCartItem] as const;
+});
+
 const IngredientProvider: React.FC<IngredientProviderProps> = ({ children }) => {
     const [ingredients, setIngredients] = useState<Ingredient[]>([]);
     const [totalQuantity, setTotalQuantity] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
+    const [cartItem, setCartItem] = useState<{ ingredient: Ingredient; quantity: number }[]>([]);
 
     useEffect(() => {
         // Chargement des données d'ingrédients à partir du fichier JSON importé
@@ -93,7 +104,7 @@ const IngredientProvider: React.FC<IngredientProviderProps> = ({ children }) => 
     }, [ingredients]);
 
     return (
-        <IngredientContext.Provider value={{ ingredients, totalQuantity, setTotalQuantity, totalPrice, setTotalPrice }}>
+        <IngredientContext.Provider value={{ ingredients, totalQuantity, setTotalQuantity, totalPrice, setTotalPrice, cartItem, setCartItem }}>
             {children}
         </IngredientContext.Provider>
     );

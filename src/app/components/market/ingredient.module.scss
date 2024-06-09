@@ -113,6 +113,15 @@ $background-ingredient: radial-gradient(
         justify-content: space-between;
       }
     }
+
+    .price,
+    .totalPrice {
+      p {
+        span {
+          color: orange;
+        }
+      }
+    }
   }
 }
 
