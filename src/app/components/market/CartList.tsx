@@ -5,6 +5,7 @@
 import React from 'react';
 import { useCartItems } from '@/app/context/IngredientContext';
 import Image from 'next/image';
+import styles from "./market.module.scss"
 
 const CartList: React.FC = () => {
   const [cartItems, setCartItems] = useCartItems();
@@ -17,27 +18,56 @@ const CartList: React.FC = () => {
     });
   };
 
+  const getRarityImg = (type: string) => {
+    switch (type) {
+      case 'Common':
+        return <Image src={"/images/Rarity/Star_Common.png"} width={20} height={20} alt="Common" />;
+      case 'Uncommon':
+        return <Image src={"/images/Rarity/Star_Uncommon.png"} width={20} height={20} alt="Uncommon" />;
+      case 'Rare':
+        return <Image src={"/images/Rarity/Star_Rare.png"} width={20} height={20} alt="Rare" />;
+      case 'Epic':
+        return <Image src={"/images/Rarity/Star_Epic.png"} width={20} height={20} alt="Epic" />;
+      default:
+        return '';
+    }
+  };
+
+
+
   return (
-    <div>
+    <div className={styles.cart}>
       {cartItems.length === 0 ? (
         <p>Cart is empty</p>
       ) : (
         <ul>
-          {cartItems.map((item, index) => (
-            <li key={index}>
-              <Image src={item.ingredient.imagePath} alt={item.ingredient.name} width={50} height={50} />
-              <div>
-                <p>{item.ingredient.name}</p>
-                <p>Rarity : {item.ingredient.rarity}</p>
+          {cartItems.map((item, index) => {
+            const rarityImg = getRarityImg(item.ingredient.rarity);
+            return (
+              <li className={styles.cartItem} key={index}>
 
-                <p>Quantity : {item.quantity}</p>
-                <p>Total price : {(item.quantity * item.ingredient.priceRange[0])}</p>
-                {/* MODIFIER TOTAL PRICE QUI PREND SEULEMENT LE 1ER CHIFFRE DE [] */}
+                <div className={styles.cartItemImg}>
+                  <Image src={item.ingredient.imagePath} alt={item.ingredient.name} width={30} height={30} />
+                </div>
 
-                <button onClick={() => removeFromCart(index)}>Delete</button>
-              </div>
-            </li>
-          ))}
+                <div className={styles.cartItemTitle}>
+                  <h4>{item.ingredient.name}</h4>
+                  <p>{rarityImg} {item.ingredient.rarity}</p>
+                </div>
+
+                <div className={styles.cartItemDetails}>
+                  <p>Quantity : {item.quantity}</p>
+                  <p>Price : {(item.quantity * item.ingredient.priceRange[0])}</p>
+                  {/* MODIFIER TOTAL PRICE QUI PREND SEULEMENT LE 1ER CHIFFRE DE [] */}
+                </div>
+
+                <div className={styles.cartItemRemove}>
+                  <button onClick={() => removeFromCart(index)}>X</button>
+                </div>
+
+              </li>
+            )
+          })}
         </ul>
       )}
     </div>

@@ -3,6 +3,7 @@
 "use client"
 
 import React from 'react';
+import styles from "./miscellaneous.module.scss"
 
 interface AppButtonProps {
   label: string;
@@ -11,7 +12,9 @@ interface AppButtonProps {
 
 const AppButton: React.FC<AppButtonProps> = ({ label, onClick }) => {
   return (
-    <button onClick={onClick}>{label}</button>
+    <div className={styles.apothecaryBtnSet}>
+      <button className={styles.apothecaryBtn} onClick={onClick}>{label}</button>
+    </div>
   );
 };
 

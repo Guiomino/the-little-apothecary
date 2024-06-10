@@ -69,7 +69,7 @@ export const useTotalPrice = (() => {
 export const useCartItems = (() => {
     const context = useContext(IngredientContext)
     if (!context) {
-        throw new Error('useTotalPrice must be used within an IngredientProvider');
+        throw new Error('useCartItems must be used within an IngredientProvider');
     }
     return [context.cartItem, context.setCartItem] as const;
 });

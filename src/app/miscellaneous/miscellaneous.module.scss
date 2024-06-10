@@ -49,3 +49,36 @@
     box-shadow: 0px 0px 20px #bb00ff;
   }
 }
+
+/////////////////////////////////////////////////////////////
+.apothecaryBtnSet {
+  width: 210px;
+  height: 60px;
+  background-color: #4b382e;
+  border: 1px solid #291f19;
+  border-radius: 10px;
+  box-shadow: 0px 10px 10px 2px #00000055;
+
+  .apothecaryBtn {
+    width: 190px;
+    height: 40px;
+    box-shadow: 0px 0px 20px #00ffa3;
+    border: 1px solid #ffffff55;
+    border-radius: 5px;
+    background: radial-gradient(
+      ellipse at center bottom,
+      #22f8de 20%,
+      #098475 80%
+    );
+    font-weight: 700;
+    text-transform: uppercase;
+    text-shadow: 0px 0px 10px #0038ff, -10px 0px 20px #0038ff,
+      10px 0px 20px #0038ff, 0px 0px 30px #0038ff;
+    filter: hue-rotate(0);
+    transition: 0.3s;
+
+    &:hover {
+      filter: hue-rotate(90deg);
+    }
+  }
+}
