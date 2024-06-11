@@ -2,13 +2,33 @@
 
 "use client"
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCartItems } from '@/app/context/IngredientContext';
 import Image from 'next/image';
-import styles from "./market.module.scss"
+import styles from "./market.module.scss";
+
+const loadFromLocalStorage = (key: string) => {
+  const value = localStorage.getItem(key) as string | null;
+  return value ? JSON.parse(value) : null;
+};
 
 const CartList: React.FC = () => {
   const [cartItems, setCartItems] = useCartItems();
+  const [prices, setPrices] = useState<{ [key: string]: number }>({});
+
+  useEffect(() => {
+    const storedPrices = loadFromLocalStorage('ingredientPrices');
+    if (storedPrices) {
+      const priceMap = storedPrices.reduce((acc: { [key: string]: number }, price: number, index: number) => {
+        const ingredientName = cartItems[index]?.ingredient.name;
+        if (ingredientName) {
+          acc[ingredientName] = price;
+        }
+        return acc;
+      }, {});
+      setPrices(priceMap);
+    }
+  }, [cartItems]);
 
   const removeFromCart = (index: number) => {
     setCartItems(prevCartItems => {
@@ -33,8 +53,6 @@ const CartList: React.FC = () => {
     }
   };
 
-
-
   return (
     <div className={styles.cart}>
       {cartItems.length === 0 ? (
@@ -43,6 +61,7 @@ const CartList: React.FC = () => {
         <ul>
           {cartItems.map((item, index) => {
             const rarityImg = getRarityImg(item.ingredient.rarity);
+            const ingredientPrice = prices[item.ingredient.name] || item.ingredient.priceRange[0];
             return (
               <li className={styles.cartItem} key={index}>
 
@@ -57,8 +76,7 @@ const CartList: React.FC = () => {
 
                 <div className={styles.cartItemDetails}>
                   <p>Quantity : {item.quantity}</p>
-                  <p>Price : {(item.quantity * item.ingredient.priceRange[0])}</p>
-                  {/* MODIFIER TOTAL PRICE QUI PREND SEULEMENT LE 1ER CHIFFRE DE [] */}
+                  <p>Price : {(item.quantity * ingredientPrice)}</p>
                 </div>
 
                 <div className={styles.cartItemRemove}>

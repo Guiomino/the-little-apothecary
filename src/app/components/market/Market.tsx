@@ -49,7 +49,7 @@ const Market: React.FC<onCloseClickProps> = ({ onCloseClick }) => {
 
                 <div className={styles.cartListBtn}>
                     <AppButton
-                        label="Buy"
+                        label="💰 Buy"
                         onClick={() => {
                             // Logique d'achat ou autre
                         }}
