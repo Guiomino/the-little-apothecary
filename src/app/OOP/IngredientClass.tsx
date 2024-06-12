@@ -33,15 +33,16 @@ class Ingredient {
     }
 
     // Calcul des prix aléatoires pour tous les ingrédients et les stocker dans localStorage
-    static calculateAndStorePrices(ingredients: Ingredient[]): number[] {
+    static calculateAndStorePrices(ingredients: Ingredient[]): { [name: string]: number } {
         const storedPrices = localStorage.getItem('ingredientPrices');
-        let prices: number[];
+        let prices: { [name: string]: number };
 
-        if (storedPrices && JSON.parse(storedPrices).length > 0) {
+        if (storedPrices && Object.keys(JSON.parse(storedPrices)).length > 0) {
             prices = JSON.parse(storedPrices);
         } else {
-            prices = ingredients.map(ingredient =>
-                Ingredient.generateRandomPrice(ingredient.priceRange[0], ingredient.priceRange[1])
+            prices = {};
+            ingredients.forEach(ingredient =>
+                prices[ingredient.name] = Ingredient.generateRandomPrice(ingredient.priceRange[0], ingredient.priceRange[1])
             );
             localStorage.setItem('ingredientPrices', JSON.stringify(prices));
         }

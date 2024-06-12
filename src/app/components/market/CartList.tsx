@@ -18,17 +18,18 @@ const CartList: React.FC = () => {
 
   useEffect(() => {
     const storedPrices = loadFromLocalStorage('ingredientPrices');
-    if (storedPrices) {
-      const priceMap = storedPrices.reduce((acc: { [key: string]: number }, price: number, index: number) => {
-        const ingredientName = cartItems[index]?.ingredient.name;
+    if (storedPrices && typeof storedPrices === 'object') { // Vérifier si storedPrices est un objet
+      const priceMap = Object.keys(storedPrices).reduce((acc: { [key: string]: number }, key: string) => {
+        const ingredientName = cartItems.find(item => item.ingredient.name === key)?.ingredient.name;
         if (ingredientName) {
-          acc[ingredientName] = price;
+          acc[ingredientName] = storedPrices[key];
         }
         return acc;
       }, {});
       setPrices(priceMap);
     }
   }, [cartItems]);
+
 
   const removeFromCart = (index: number) => {
     setCartItems(prevCartItems => {

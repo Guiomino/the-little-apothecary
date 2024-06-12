@@ -2,11 +2,11 @@
 
 "use client"
 
+
 import React, { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import Ingredient from '../OOP/IngredientClass';
 import ingredientsData from '../data/ingredients.json';
 
-// Définition du type pour les données d'ingrédients
 type IngredientsData = {
     name: string;
     type: string;
@@ -81,7 +81,6 @@ const IngredientProvider: React.FC<IngredientProviderProps> = ({ children }) => 
     const [cartItem, setCartItem] = useState<{ ingredient: Ingredient; quantity: number }[]>([]);
 
     useEffect(() => {
-        // Chargement des données d'ingrédients à partir du fichier JSON importé
         const ingredientsList: IngredientsData = ingredientsData.ingredients.map(item =>
             new Ingredient(
                 item.name,
