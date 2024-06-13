@@ -3,7 +3,7 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import { useCartItems } from '@/app/context/IngredientContext';
+import { useCartItems, useResetCounter } from '@/app/context/IngredientContext';
 import Image from 'next/image';
 import styles from "./market.module.scss";
 
@@ -15,10 +15,11 @@ const loadFromLocalStorage = (key: string) => {
 const CartList: React.FC = () => {
   const [cartItems, setCartItems] = useCartItems();
   const [prices, setPrices] = useState<{ [key: string]: number }>({});
+  const resetCounter = useResetCounter();
 
   useEffect(() => {
     const storedPrices = loadFromLocalStorage('ingredientPrices');
-    if (storedPrices && typeof storedPrices === 'object') { // Vérifier si storedPrices est un objet
+    if (storedPrices && typeof storedPrices === 'object') { // Vérifier si storedPrices est un 'objet'
       const priceMap = Object.keys(storedPrices).reduce((acc: { [key: string]: number }, key: string) => {
         const ingredientName = cartItems.find(item => item.ingredient.name === key)?.ingredient.name;
         if (ingredientName) {
@@ -34,7 +35,8 @@ const CartList: React.FC = () => {
   const removeFromCart = (index: number) => {
     setCartItems(prevCartItems => {
       const newCartItems = [...prevCartItems];
-      newCartItems.splice(index, 1);
+      const removedItem = newCartItems.splice(index, 1)[0];
+      resetCounter(removedItem.ingredient.name);
       return newCartItems;
     });
   };

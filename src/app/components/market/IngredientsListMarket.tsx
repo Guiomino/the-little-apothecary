@@ -3,7 +3,7 @@
 "use client"
 
 import React, { useState, useEffect } from 'react';
-import { useCartItems, useIngredients, useTotalPrice, useTotalQuantity } from '@/app/context/IngredientContext';
+import { useCartItems, useIngredients, useTotalPrice, useTotalQuantity, useResetCounter, useQuantities } from '@/app/context/IngredientContext';
 import IngredientClass from "@/app/OOP/IngredientClass";
 import styles from "./ingredient.module.scss";
 import Image from 'next/image';
@@ -15,10 +15,11 @@ const loadFromLocalStorage = (key: string) => {
 
 const IngredientsListMarket: React.FC = () => {
   const ingredients = useIngredients();
-  const [quantities, setQuantities] = useState<{ [name: string]: number }>({});
+  const [quantities, setQuantities] = useQuantities();
   const [totalQuantity, setTotalQuantity] = useTotalQuantity();
   const [totalPrice, setTotalPrice] = useTotalPrice();
   const [cartItems, setCartItems] = useCartItems();
+  const resetCounter = useResetCounter();
   const [prices, setPrices] = useState<{ [name: string]: number }>({});
   const [loading, setLoading] = useState(true);
 
@@ -41,13 +42,13 @@ const IngredientsListMarket: React.FC = () => {
     });
     setQuantities(initialQuantities);
     setLoading(false);
-  }, [ingredients]);
+  }, [ingredients, setQuantities]);
 
   useEffect(() => {
     const total = Object.values(quantities).reduce((sum, quantity) => sum + quantity, 0);
     setTotalQuantity(total);
 
-    const totalPrice = ingredients.reduce((sum, ingredient) => 
+    const totalPrice = ingredients.reduce((sum, ingredient) =>
       sum + (quantities[ingredient.name] * (prices[ingredient.name] || 0)), 0);
     setTotalPrice(totalPrice);
 
@@ -62,13 +63,6 @@ const IngredientsListMarket: React.FC = () => {
     setQuantities(prev => ({
       ...prev,
       [name]: Math.max((prev[name] || 0) + amount, 0),
-    }));
-  };
-
-  const resetCounter = (name: string) => {
-    setQuantities(prev => ({
-      ...prev,
-      [name]: 0,
     }));
   };
 
@@ -130,7 +124,7 @@ const IngredientsListMarket: React.FC = () => {
       {ingredients.map((ingredient) => {
         const price = prices[ingredient.name] !== undefined ? prices[ingredient.name] : 'N/A';
         const isPriority = ingredients.indexOf(ingredient) < 5;
-        const rarityClass  = getRarityClass(ingredient.rarity);
+        const rarityClass = getRarityClass(ingredient.rarity);
         const typeImg = getTypeImg(ingredient.type);
         const rarityImg = getRarityImg(ingredient.rarity);
         const totalPrice = getTotalPrice(ingredient.name);
