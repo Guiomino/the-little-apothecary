@@ -41,6 +41,21 @@ const CartList: React.FC = () => {
     });
   };
 
+  const getTypeImg = (type: string) => {
+    switch (type) {
+      case 'Mineral':
+        return <Image src={"/images/Type/Type_Mineral.png"} width={10} height={10} alt="Mineral" />;
+      case 'Vegetal':
+        return <Image src={"/images/Type/Type_Vegetal.png"} width={10} height={10} alt="Vegetal" />;
+      case 'Animal':
+        return <Image src={"/images/Type/Type_Animal.png"} width={10} height={10} alt="Animal" />;
+      case 'Mushroom':
+        return <Image src={"/images/Type/Type_Mushroom.png"} width={10} height={10} alt="Mushroom" />;
+      default:
+        return '';
+    }
+  };
+
   const getRarityImg = (type: string) => {
     switch (type) {
       case 'Common':
@@ -64,12 +79,14 @@ const CartList: React.FC = () => {
         <ul>
           {cartItems.map((item, index) => {
             const rarityImg = getRarityImg(item.ingredient.rarity);
+            const typeImg = getTypeImg(item.ingredient.type);
             const ingredientPrice = prices[item.ingredient.name] || item.ingredient.priceRange[0];
             return (
               <li className={styles.cartItem} key={index}>
 
                 <div className={styles.cartItemImg}>
                   <Image src={item.ingredient.imagePath} alt={item.ingredient.name} width={30} height={30} />
+                  <div>{typeImg}</div>
                 </div>
 
                 <div className={styles.cartItemTitle}>

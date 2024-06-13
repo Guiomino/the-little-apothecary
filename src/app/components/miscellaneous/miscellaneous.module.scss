@@ -52,12 +52,36 @@
 
 /////////////////////////////////////////////////////////////
 .apothecaryBtnSet {
+  position: relative;
   width: 210px;
   height: 60px;
   background-color: #4b382e;
-  border: 1px solid #291f19;
-  border-radius: 10px;
   box-shadow: 0px 10px 10px 2px #00000055;
+
+  .topLeft {
+    position: absolute;
+    top: 0;
+    left: -24px;
+  }
+  .topRight {
+    position: absolute;
+    right: -24px;
+    top: 0;
+    transform: scaleX(-1);
+  }
+  .bottomRight {
+    position: absolute;
+    right: -24px;
+    bottom: 0;
+    rotate: 180deg;
+  }
+  .bottomLeft {
+    position: absolute;
+    left: -24px;
+    bottom: 0;
+    rotate: 180deg;
+    transform: scaleX(-1);
+  }
 }
 
 .apothecaryBtn {
@@ -101,5 +125,40 @@
 
   &:hover {
     box-shadow: 0px 0px 50px 5px #00ffa3;
+  }
+}
+
+// BRANCH BUTTON
+.AppButtonBranch {
+  position: relative;
+  width: 25px;
+  height: 20px;
+
+  .first {
+    position: absolute;
+    width: 25px;
+    height: 8px;
+    top: 0;
+    left: 0;
+    background-color: #4b382e;
+    border-radius: 5px 0 0 0;
+  }
+  .second {
+    position: absolute;
+    width: 8px;
+    height: 20px;
+    top: 0;
+    left: 0;
+    background-color: #4b382e;
+    border-radius: 5px 0 0 5px;
+  }
+  .third {
+    position: absolute;
+    width: 15px;
+    height: 8px;
+    bottom: 0;
+    left: 0;
+    background-color: #4b382e;
+    border-radius: 0 0 5px 5px;
   }
 }

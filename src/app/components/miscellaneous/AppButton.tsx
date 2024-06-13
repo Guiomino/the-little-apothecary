@@ -4,6 +4,7 @@
 
 import React from 'react';
 import styles from "./miscellaneous.module.scss"
+import AppButtonBranch from './AppButtonBranch';
 
 interface AppButtonProps {
   label: string;
@@ -13,6 +14,12 @@ interface AppButtonProps {
 const AppButton: React.FC<AppButtonProps> = ({ label, onClick }) => {
   return (
     <div className={styles.apothecaryBtnSet}>
+
+      <div className={styles.topLeft}><AppButtonBranch /></div>
+      <div className={styles.topRight}><AppButtonBranch /></div>
+      <div className={styles.bottomRight}><AppButtonBranch /></div>
+      <div className={styles.bottomLeft}><AppButtonBranch /></div>
+
       <button className={styles.apothecaryBtn} onClick={onClick}>{label}</button>
     </div>
   );

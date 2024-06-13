@@ -179,6 +179,7 @@ $borderCyan: #00eaff;
             border: 1px solid $borderCyan;
 
             .cartItemImg {
+              position: relative;
               width: 15%;
               height: 100%;
               padding: 5px;
@@ -195,6 +196,12 @@ $borderCyan: #00eaff;
 
               img {
                 filter: drop-shadow(-2px 5px 3px #00000088);
+              }
+
+              div {
+                position: absolute;
+                top: 2px;
+                right: 5px;
               }
             }
 
