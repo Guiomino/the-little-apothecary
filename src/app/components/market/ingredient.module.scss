@@ -279,5 +279,9 @@ $background-ingredient: radial-gradient(
 
   &:hover::after {
     opacity: 1;
+    content: "Show details";
+    font-size: 10px;
+    text-transform: capitalize;
+    font-weight: 200;
   }
 }

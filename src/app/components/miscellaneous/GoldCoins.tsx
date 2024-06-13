@@ -3,7 +3,7 @@
 "use client"
 
 import React from 'react';
-import styles from "@/app/miscellaneous/miscellaneous.module.scss"
+import styles from "./miscellaneous.module.scss"
 import Image from 'next/image';
 
 interface GoldCoinsProps {

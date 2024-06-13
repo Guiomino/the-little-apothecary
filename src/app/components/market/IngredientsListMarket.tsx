@@ -13,7 +13,12 @@ const loadFromLocalStorage = (key: string) => {
   return value ? JSON.parse(value) : null;
 };
 
-const IngredientsListMarket: React.FC = () => {
+interface IngredientsListMarketProps {
+  onIngredientClick: (ingredient: IngredientClass) => void;
+};
+
+const IngredientsListMarket: React.FC<IngredientsListMarketProps> = ({ onIngredientClick }) => {
+  const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
   const ingredients = useIngredients();
   const [quantities, setQuantities] = useQuantities();
   const [totalQuantity, setTotalQuantity] = useTotalQuantity();
@@ -22,6 +27,11 @@ const IngredientsListMarket: React.FC = () => {
   const resetCounter = useResetCounter();
   const [prices, setPrices] = useState<{ [name: string]: number }>({});
   const [loading, setLoading] = useState(true);
+
+  const handleIngredientClick = (ingredient: IngredientClass) => {
+    setSelectedIngredient(ingredient.name);
+    onIngredientClick(ingredient);
+  };
 
   useEffect(() => {
     const storedPrices = loadFromLocalStorage('ingredientPrices');
@@ -72,7 +82,8 @@ const IngredientsListMarket: React.FC = () => {
 
   if (loading) {
     return <div>Loading...</div>;
-  }
+  };
+
 
   const getRarityClass = (rarity: string) => {
     switch (rarity) {
@@ -136,7 +147,7 @@ const IngredientsListMarket: React.FC = () => {
             </div>
 
             <div className={styles.ingrTitle}>
-              <button className={styles.buttonWithOverlay}>{ingredient.name}</button>
+              <button onClick={() => handleIngredientClick(ingredient)} className={styles.buttonWithOverlay}>{ingredient.name}</button>
               <div className={styles.ingrTypeAndRarity}>
                 <p>{typeImg} {ingredient.type}</p>
                 <p>{rarityImg} {ingredient.rarity}</p>

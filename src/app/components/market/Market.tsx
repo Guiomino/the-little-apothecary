@@ -3,16 +3,18 @@
 "use client"
 
 import React, { useState } from 'react';
-import FilterIngredients from '@/app/miscellaneous/FilterIngredients';
-import GoldCoins from '@/app/miscellaneous/GoldCoins';
-import LevelUser from '@/app/miscellaneous/LevelUser';
-import CloseModal from '@/app/miscellaneous/CloseModal';
+import FilterIngredients from '@/app/components/miscellaneous/FilterIngredients';
+import GoldCoins from '@/app/components/miscellaneous/GoldCoins';
+import LevelUser from '@/app/components/miscellaneous/LevelUser';
+import CloseModal from '@/app/components/miscellaneous/CloseModal';
 import IngredientsListMarket from '@/app/components/market/IngredientsListMarket';
 import CartQuantity from '@/app/components/market/CartQuantity';
 import CartPrice from '@/app/components/market/CartPrice';
 import CartList from '@/app/components/market/CartList';
-import AppButton from '@/app/miscellaneous/AppButton';
+import AppButton from '@/app/components/miscellaneous/AppButton';
 import styles from "@/app/components/market/market.module.scss"
+import Details from '../details/Details';
+import IngredientClass from "@/app/OOP/IngredientClass";
 
 interface onCloseClickProps {
     onCloseClick: () => void
@@ -20,6 +22,18 @@ interface onCloseClickProps {
 
 const Market: React.FC<onCloseClickProps> = ({ onCloseClick }) => {
     const [goldCoins, setGoldCoins] = useState(5000);
+
+    const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
+    const [showDetails, setShowDetails] = useState<boolean>(false);
+
+    const handleIngredientClick = (ingredient: IngredientClass) => {
+        setSelectedIngredient(ingredient.name);
+        setShowDetails(true);
+    };
+
+    const handleCloseDetails = () => {
+        setShowDetails(false);
+    };
 
     return (
         <section className={styles.market}>
@@ -34,9 +48,11 @@ const Market: React.FC<onCloseClickProps> = ({ onCloseClick }) => {
                 </div>
 
                 <div className={`${styles.list} ${styles.filter} ${styles.details}`}>
-                    <IngredientsListMarket />
+                    {showDetails && selectedIngredient && (
+                        <Details ingredientName={selectedIngredient} onClose={handleCloseDetails} />
+                    )}
+                    {!showDetails && <IngredientsListMarket onIngredientClick={handleIngredientClick} />}
                 </div>
-
                 <div className={styles.summary}>
                     <CartQuantity />
                     <h2>Cart</h2>

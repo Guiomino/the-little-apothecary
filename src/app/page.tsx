@@ -6,12 +6,12 @@ import styles from "./page.module.scss";
 import IngredientProvider from "./context/IngredientContext";
 import Market from "./components/market/Market";
 import { useState } from "react";
-import OpenModalButton from "@/app/miscellaneous/OpenModalButton";
+import OpenModalButton from "@/app/components/miscellaneous/OpenModalButton";
 
 export default function Home() {
 
   const [isdisplayed, setIsDisplayed] = useState(false);
-  const modalButtonHandler = () => setIsDisplayed(!isdisplayed);
+  const modalOpenHandler = () => setIsDisplayed(!isdisplayed);
   const modalCloseHandler = () => setIsDisplayed(false);
 
   return (
@@ -20,7 +20,7 @@ export default function Home() {
         <main className={styles.mainPage}>
           <h1>The Little Apothecary</h1>
           <div className={styles.OpenModalButton}>
-            <OpenModalButton onClick={modalButtonHandler} label="🧺" />
+            <OpenModalButton onClick={modalOpenHandler} label="🧺" />
           </div>
           {
             isdisplayed && (
