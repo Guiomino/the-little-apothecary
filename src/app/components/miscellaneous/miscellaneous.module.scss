@@ -140,7 +140,7 @@
     height: 8px;
     top: 0;
     left: 0;
-    background-color: #4b382e;
+    background: linear-gradient(to left, #4b382e 33%, #5c463a 66%);
     border-radius: 5px 0 0 0;
   }
   .second {
@@ -149,7 +149,7 @@
     height: 20px;
     top: 0;
     left: 0;
-    background-color: #4b382e;
+    background: linear-gradient(to bottom, #5c463a 33%, #72584a 66%);
     border-radius: 5px 0 0 5px;
   }
   .third {
@@ -158,7 +158,7 @@
     height: 8px;
     bottom: 0;
     left: 0;
-    background-color: #4b382e;
+    background: linear-gradient(to right, #72584a 25%, #6f975f 70%);
     border-radius: 0 0 5px 5px;
   }
 }
