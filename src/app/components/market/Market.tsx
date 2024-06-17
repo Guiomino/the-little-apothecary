@@ -48,10 +48,12 @@ const Market: React.FC<onCloseClickProps> = ({ onCloseClick }) => {
                 </div>
 
                 <div className={`${styles.list} ${styles.filter} ${styles.details}`}>
+
                     {showDetails && selectedIngredient && (
                         <Details ingredientName={selectedIngredient} onClose={handleCloseDetails} />
                     )}
-                    {!showDetails && <IngredientsListMarket onIngredientClick={handleIngredientClick} />}
+                    {!showDetails} <IngredientsListMarket onIngredientClick={handleIngredientClick} />
+
                 </div>
                 <div className={styles.summary}>
                     <CartQuantity />
