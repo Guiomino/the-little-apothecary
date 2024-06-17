@@ -2,7 +2,7 @@
 
 "use client"
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useIngredients } from '@/app/context/IngredientContext';
 import Image from 'next/image';
 import styles from "./details.module.scss"
@@ -13,9 +13,23 @@ interface DetailsProps {
   onClose: () => void;
 };
 
+const loadFromLocalStorage = (key: string) => {
+  const value = localStorage.getItem(key);
+  return value ? JSON.parse(value) : null;
+};
+
 const Details: React.FC<DetailsProps> = ({ ingredientName, onClose }) => {
   const ingredients = useIngredients();
   const ingredient = ingredients.find(ingredient => ingredient.name === ingredientName);
+  const [price, setPrice] = useState<number | null>(null);
+
+  useEffect(() => {
+    const storedPrices = loadFromLocalStorage('ingredientPrices');
+    if (storedPrices && ingredient) {
+      setPrice(storedPrices[ingredient.name] || null);
+    }
+  }, [ingredient]);
+
 
   if (!ingredient) {
     return <div>Ingredient not found!</div>;
@@ -111,8 +125,8 @@ const Details: React.FC<DetailsProps> = ({ ingredientName, onClose }) => {
 
         <div className={styles.description}>
           <div className={styles.PriceAndStock}>
-            <p><strong>Price : </strong>{goldImage}<span>200</span></p>
-            <p><strong>Stock : </strong>2</p>
+            <p><strong>Price : </strong>{goldImage}<span>{price !== null ? price : 'N/A'}</span></p>
+            <p><strong>Stock : </strong>0</p>
           </div>
           <p><strong>Description : </strong>{ingredient.description}</p>
           <p><strong>Success Rate : </strong><span>{ingredient.successRate}%</span></p>
