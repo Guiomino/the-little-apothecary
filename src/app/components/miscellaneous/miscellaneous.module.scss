@@ -4,6 +4,7 @@
   height: 100%;
   border: none;
   transition: 0.3s;
+  position: relative;
 }
 
 .closeButton {
@@ -19,6 +20,14 @@
 
   &:hover {
     background-color: #ffc977;
+  }
+  &:hover::after {
+    content: "Filter";
+    position: absolute;
+    top: -16px;
+    left: 0;
+    z-index: 999;
+    color: #ffffff88;
   }
 }
 
