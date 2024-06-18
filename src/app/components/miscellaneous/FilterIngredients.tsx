@@ -6,9 +6,13 @@ import React from 'react';
 import styles from "./miscellaneous.module.scss"
 import Image from 'next/image';
 
-const FilterIngredients: React.FC = () => {
+interface FilterIngredientsProps {
+  onFilterClick: () => void;
+};
+
+const FilterIngredients: React.FC<FilterIngredientsProps> = ({ onFilterClick }) => {
   return (
-    <button className={styles.filterButton}>
+    <button onClick={onFilterClick} className={styles.filterButton}>
       <Image src={"/images/Miscellaneous/Filter.png"} width={22} height={22} alt='Filter' />
     </button>
   );

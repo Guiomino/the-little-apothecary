@@ -1,0 +1,11 @@
+.filter {
+  position: fixed;
+  z-index: 99;
+  width: calc(100% - 30px);
+  height: calc(100% - 30px);
+  overflow-y: scroll;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: red;
+}

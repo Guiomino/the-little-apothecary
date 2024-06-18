@@ -15,6 +15,7 @@ import AppButton from '@/app/components/miscellaneous/AppButton';
 import styles from "@/app/components/market/market.module.scss"
 import Details from '../details/Details';
 import IngredientClass from "@/app/OOP/IngredientClass";
+import Filter from '../filter/Filter';
 
 interface onCloseClickProps {
     onCloseClick: () => void
@@ -25,6 +26,7 @@ const Market: React.FC<onCloseClickProps> = ({ onCloseClick }) => {
 
     const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
     const [showDetails, setShowDetails] = useState<boolean>(false);
+    const [showFilter, setShowFilter] = useState<boolean>(false);
 
     const handleIngredientClick = (ingredient: IngredientClass) => {
         setSelectedIngredient(ingredient.name);
@@ -35,12 +37,20 @@ const Market: React.FC<onCloseClickProps> = ({ onCloseClick }) => {
         setShowDetails(false);
     };
 
+    const handleFilterClick = (() => {
+        setShowFilter(true)
+    });
+
+    const handleCloseFilter = (() => {
+        setShowFilter(false)
+    })
+
     return (
         <section className={styles.market}>
             <div className={styles.modal}>
 
                 <div className={styles.top}>
-                    <FilterIngredients />
+                    <FilterIngredients onFilterClick={handleFilterClick} />
                     <GoldCoins goldCoins={goldCoins} />
                     <h2>Market</h2>
                     <LevelUser />
@@ -48,13 +58,16 @@ const Market: React.FC<onCloseClickProps> = ({ onCloseClick }) => {
                 </div>
 
                 <div className={`${styles.list} ${styles.filter} ${styles.details}`}>
-
                     {showDetails && selectedIngredient && (
                         <Details ingredientName={selectedIngredient} onClose={handleCloseDetails} />
                     )}
-                    {!showDetails} <IngredientsListMarket onIngredientClick={handleIngredientClick} />
-
+                    {showFilter && selectedIngredient && (
+                        <Filter onClose={handleCloseFilter} />
+                    )}
+                    {!showDetails || !showFilter} <IngredientsListMarket onIngredientClick={handleIngredientClick} />
                 </div>
+
+
                 <div className={styles.summary}>
                     <CartQuantity />
                     <h2>Cart</h2>
