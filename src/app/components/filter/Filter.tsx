@@ -3,6 +3,7 @@
 import React from 'react'
 import styles from "./filter.module.scss"
 import Image from 'next/image';
+import RangeSlider from './RangeSlider';
 
 interface FilterProps {
     onClose: () => void;
@@ -70,9 +71,7 @@ const Filter: React.FC<FilterProps> = ({ onClose }) => {
 
                 <div className={styles.priceScale}>
                     <h5>Price scale</h5>
-                    <div>
-                        <button><Image src={"/images/Rarity/Star_Common.png"} width={20} height={20} alt='Common' /></button>
-                    </div>
+                    <RangeSlider />
                 </div>
             </div >
         </>

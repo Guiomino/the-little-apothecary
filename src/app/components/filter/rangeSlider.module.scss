@@ -1,0 +1,87 @@
+/* rangeSlider.module.scss */
+
+.sliderContainer {
+  position: relative;
+  width: 80%;
+  margin: 50px auto;
+}
+
+.rangeBar {
+  position: relative;
+  height: 10px;
+  background-color: white;
+  box-shadow: inset 0 3px 3px #00000055;
+  border-radius: 5px;
+}
+
+.range {
+  position: absolute;
+  height: 100%;
+  background-color: orange;
+  box-shadow: inset 0 3px 3px #00000055;
+}
+
+.handle {
+  position: absolute;
+  top: 50%;
+  width: 23px;
+  height: 23px;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: inset 0 0 5px #0000004d, 0 0 5px #00000033;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 26%;
+    left: 26%;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: orange;
+  }
+}
+
+.handle.minHandle {
+  transform: translate(-50%, -50%);
+}
+
+.handle.maxHandle {
+  transform: translate(-50%, -50%);
+}
+
+.tooltip {
+  position: absolute;
+  top: -40px;
+  background-color: white;
+  padding: 0 10px;
+  border-radius: 5px;
+  color: #333;
+  box-shadow: 0 0 5px #00000033;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+}
+
+.valueLabel {
+  position: absolute;
+  bottom: -40px;
+  background-color: transparent;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  user-select: none;
+  display: flex;
+  gap: 10px;
+}
