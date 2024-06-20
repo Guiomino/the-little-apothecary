@@ -113,23 +113,31 @@ $background-details: radial-gradient(
       position: relative;
       transition: 0.3s;
 
-      &.common:hover {
+      &.common:hover,
+      &.common.rarityActive {
         filter: drop-shadow(0 0 8px $common);
       }
-      &.uncommon:hover {
+      &.uncommon:hover,
+      &.uncommon.rarityActive {
         filter: drop-shadow(0 0 8px $uncommon);
       }
-      &.rare:hover {
+      &.rare:hover,
+      &.rare.rarityActive {
         filter: drop-shadow(0 0 8px $rare);
       }
-      &.epic:hover {
+      &.epic:hover,
+      &.epic.rarityActive {
         filter: drop-shadow(0 0 8px $epic);
       }
 
       &.common:hover::after,
       &.uncommon:hover::after,
       &.rare:hover::after,
-      &.epic:hover::after {
+      &.epic:hover::after,
+      &.common.rarityActive::after,
+      &.uncommon.rarityActive::after,
+      &.rare.rarityActive::after,
+      &.epic.rarityActive::after {
         content: "";
         position: absolute;
         bottom: -10px;
@@ -141,7 +149,8 @@ $background-details: radial-gradient(
         pointer-events: none;
       }
 
-      &.common:hover::after {
+      &.common:hover::after,
+      &.common.rarityActive::after {
         background: radial-gradient(
           ellipse at center,
           white 30%,
@@ -150,7 +159,8 @@ $background-details: radial-gradient(
         );
       }
 
-      &.uncommon:hover::after {
+      &.uncommon:hover::after,
+      &.uncommon.rarityActive::after {
         background: radial-gradient(
           ellipse at center,
           white 30%,
@@ -159,7 +169,8 @@ $background-details: radial-gradient(
         );
       }
 
-      &.rare:hover::after {
+      &.rare:hover::after,
+      &.rare.rarityActive::after {
         background: radial-gradient(
           ellipse at center,
           white 30%,
@@ -168,7 +179,8 @@ $background-details: radial-gradient(
         );
       }
 
-      &.epic:hover::after {
+      &.epic:hover::after,
+      &.epic.rarityActive::after {
         background: radial-gradient(
           ellipse at center,
           white 30%,

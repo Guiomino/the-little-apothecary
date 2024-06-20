@@ -70,22 +70,22 @@ const IngredientsFilter: React.FC<FilterProps> = ({ onClose, onRarityChange, onT
                     <h5>Rarity</h5>
                     <div>
                         <div className={styles.tooltip}>
-                            <button className={styles.common} onClick={() => onRarityChange("Common")}><Image src={"/images/Rarity/Star_Common.png"} width={30} height={30} alt='Common' /></button>
+                            <button className={`${styles.common} ${selectedRarity === "Common" ? styles.rarityActive : ""}`} onClick={() => handleRarityClick("Common")}><Image src={"/images/Rarity/Star_Common.png"} width={30} height={30} alt='Common' /></button>
                             <div className={styles.tooltipText}>Common</div>
                         </div>
 
                         <div className={styles.tooltip}>
-                            <button className={styles.uncommon} onClick={() => onRarityChange("Uncommon")}><Image src={"/images/Rarity/Star_Uncommon.png"} width={30} height={30} alt='Uncommon' /></button>
+                            <button className={`${styles.uncommon} ${selectedRarity === "Uncommon" ? styles.rarityActive : ""}`} onClick={() => handleRarityClick("Uncommon")}><Image src={"/images/Rarity/Star_Uncommon.png"} width={30} height={30} alt='Uncommon' /></button>
                             <div className={styles.tooltipText}>Uncommon</div>
                         </div>
 
                         <div className={styles.tooltip}>
-                            <button className={styles.rare} onClick={() => onRarityChange("Rare")}><Image src={"/images/Rarity/Star_Rare.png"} width={30} height={30} alt='Rare' /></button>
+                            <button className={`${styles.rare} ${selectedRarity === "Rare" ? styles.rarityActive : ""}`} onClick={() => handleRarityClick("Rare")}><Image src={"/images/Rarity/Star_Rare.png"} width={30} height={30} alt='Rare' /></button>
                             <div className={styles.tooltipText}>Rare</div>
                         </div>
 
                         <div className={styles.tooltip}>
-                            <button className={styles.epic} onClick={() => onRarityChange("Epic")}><Image src={"/images/Rarity/Star_Epic.png"} width={30} height={30} alt='Epic' /></button>
+                            <button className={`${styles.epic} ${selectedRarity === "Epic" ? styles.rarityActive : ""}`} onClick={() => handleRarityClick("Epic")}><Image src={"/images/Rarity/Star_Epic.png"} width={30} height={30} alt='Epic' /></button>
                             <div className={styles.tooltipText}>Epic</div>
                         </div>
                     </div >
