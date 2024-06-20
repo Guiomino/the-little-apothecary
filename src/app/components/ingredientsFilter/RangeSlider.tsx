@@ -66,16 +66,16 @@ const RangeSlider: React.FC = () => {
         };
     }, [minValue, maxValue]);
 
-    const goldImage = <Image src={"/images/Miscellaneous/Gold.png"} width={15} height={15} alt='Gold'/>
+    const goldImage = <Image src={"/images/Miscellaneous/Gold.png"} width={15} height={15} alt='Gold' />
 
     return (
         <div className={styles.sliderContainer}>
             <div className={styles.rangeBar} ref={rangeBar}>
-                <div className={styles.valueLabel} style={{ left: 0 }}>
-                    {goldImage}{minValue}
+                <div className={styles.valueLabelLeft}>
+                    min : {goldImage} <span>1</span>
                 </div>
-                <div className={styles.valueLabel} style={{ right: - 10 }}>
-                    {goldImage}{maxValue}
+                <div className={styles.valueLabelRight}>
+                    max : {goldImage} <span>350</span>
                 </div>
 
                 <div className={styles.tooltip} style={{ left: `${((minValue - 1) / 349) * 100}%` }}>

@@ -30,6 +30,7 @@
   border-radius: 50%;
   cursor: pointer;
   box-shadow: inset 0 0 5px #0000004d, 0 0 5px #00000033;
+  user-select: none;
 
   &::after {
     content: "";
@@ -73,15 +74,32 @@
   border-width: 5px;
   border-style: solid;
   border-color: white transparent transparent transparent;
+  user-select: none;
 }
 
-.valueLabel {
+.valueLabelLeft {
   position: absolute;
   bottom: -40px;
-  background-color: transparent;
-  transform: translateX(-50%);
-  white-space: nowrap;
+  left: 0;
+  transform: translateX(-20%);
   user-select: none;
   display: flex;
   gap: 10px;
+}
+
+.valueLabelRight {
+  position: absolute;
+  bottom: -40px;
+  right: 0;
+  transform: translateX(20%);
+  user-select: none;
+  display: flex;
+  gap: 10px;
+}
+
+.valueLabelLeft,
+.valueLabelRight {
+  span {
+    color: gold;
+  }
 }

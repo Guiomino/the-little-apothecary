@@ -15,7 +15,7 @@ import AppButton from '@/app/components/miscellaneous/AppButton';
 import styles from "@/app/components/market/market.module.scss"
 import Details from '../details/Details';
 import IngredientClass from "@/app/OOP/IngredientClass";
-import Filter from '../filter/Filter';
+import IngredientsFilter from '../ingredientsFilter/IngredientsFilter';
 
 interface onCloseClickProps {
     onCloseClick: () => void
@@ -27,6 +27,7 @@ const Market: React.FC<onCloseClickProps> = ({ onCloseClick }) => {
     const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
     const [showDetails, setShowDetails] = useState<boolean>(false);
     const [showFilter, setShowFilter] = useState<boolean>(false);
+    const [selectedRarity, setSelectedRarity] = useState<string | null>(null);
 
     const handleIngredientClick = (ingredient: IngredientClass) => {
         setSelectedIngredient(ingredient.name);
@@ -58,14 +59,14 @@ const Market: React.FC<onCloseClickProps> = ({ onCloseClick }) => {
                 </div>
 
                 <div className={`${styles.list} ${styles.filter} ${styles.details}`}>
-                    <IngredientsListMarket onIngredientClick={handleIngredientClick} />
+                    <IngredientsListMarket onIngredientClick={handleIngredientClick} selectedRarity={selectedRarity} />
 
                     {showDetails && selectedIngredient && (
                         <Details ingredientName={selectedIngredient} onClose={handleCloseDetails} />
                     )}
 
                     {showFilter && (
-                        <Filter onClose={handleCloseFilter} />
+                        <IngredientsFilter onClose={handleCloseFilter} onRarityChange={setSelectedRarity} />
                     )}
                 </div>
 

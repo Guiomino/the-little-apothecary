@@ -1,15 +1,21 @@
-// Filter.tsx
+// IngredientsFilter.tsx
 
 import React from 'react'
-import styles from "./filter.module.scss"
+import styles from "./ingredientsFilter.module.scss"
 import Image from 'next/image';
 import RangeSlider from './RangeSlider';
 
 interface FilterProps {
     onClose: () => void;
+    onRarityChange: (rarity: string | null) => void;
 };
 
-const Filter: React.FC<FilterProps> = ({ onClose }) => {
+const IngredientsFilter: React.FC<FilterProps> = ({ onClose, onRarityChange }) => {
+
+    const handleRarityClick = (rarity: string | null) => {
+        onRarityChange(rarity)
+    };
+
     return (
         <>
             <div className={styles.filter}>
@@ -46,22 +52,22 @@ const Filter: React.FC<FilterProps> = ({ onClose }) => {
                     <h5>Rarity</h5>
                     <div>
                         <div className={styles.tooltip}>
-                            <button className={styles.common}><Image src={"/images/Rarity/Star_Common.png"} width={30} height={30} alt='Common' /></button>
+                            <button className={styles.common} onClick={() => onRarityChange("Common")}><Image src={"/images/Rarity/Star_Common.png"} width={30} height={30} alt='Common' /></button>
                             <div className={styles.tooltipText}>Common</div>
                         </div>
 
                         <div className={styles.tooltip}>
-                            <button className={styles.uncommon}><Image src={"/images/Rarity/Star_Uncommon.png"} width={30} height={30} alt='Uncommon' /></button>
+                            <button className={styles.uncommon} onClick={() => onRarityChange("Uncommon")}><Image src={"/images/Rarity/Star_Uncommon.png"} width={30} height={30} alt='Uncommon' /></button>
                             <div className={styles.tooltipText}>Uncommon</div>
                         </div>
 
                         <div className={styles.tooltip}>
-                            <button className={styles.rare}><Image src={"/images/Rarity/Star_Rare.png"} width={30} height={30} alt='Rare' /></button>
+                            <button className={styles.rare} onClick={() => onRarityChange("Rare")}><Image src={"/images/Rarity/Star_Rare.png"} width={30} height={30} alt='Rare' /></button>
                             <div className={styles.tooltipText}>Rare</div>
                         </div>
 
                         <div className={styles.tooltip}>
-                            <button className={styles.epic}><Image src={"/images/Rarity/Star_Epic.png"} width={30} height={30} alt='Epic' /></button>
+                            <button className={styles.epic} onClick={() => onRarityChange("Epic")}><Image src={"/images/Rarity/Star_Epic.png"} width={30} height={30} alt='Epic' /></button>
                             <div className={styles.tooltipText}>Epic</div>
                         </div>
                     </div >
@@ -78,4 +84,4 @@ const Filter: React.FC<FilterProps> = ({ onClose }) => {
     )
 }
 
-export default Filter
+export default IngredientsFilter;

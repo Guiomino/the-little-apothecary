@@ -15,9 +15,10 @@ const loadFromLocalStorage = (key: string) => {
 
 interface IngredientsListMarketProps {
   onIngredientClick: (ingredient: IngredientClass) => void;
+  selectedRarity: string | null;
 };
 
-const IngredientsListMarket: React.FC<IngredientsListMarketProps> = ({ onIngredientClick }) => {
+const IngredientsListMarket: React.FC<IngredientsListMarketProps> = ({ onIngredientClick, selectedRarity }) => {
   const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
   const ingredients = useIngredients();
   const [quantities, setQuantities] = useQuantities();
@@ -130,56 +131,62 @@ const IngredientsListMarket: React.FC<IngredientsListMarketProps> = ({ onIngredi
     }
   };
 
+  const filteredIngredients = selectedRarity
+    ? ingredients.filter(ingredient => ingredient.rarity === selectedRarity)
+    : ingredients;
+
   return (
-    <div className={styles.ingredientsContainer}>
-      {ingredients.map((ingredient) => {
-        const price = prices[ingredient.name] !== undefined ? prices[ingredient.name] : 'N/A';
-        const isPriority = ingredients.indexOf(ingredient) < 5;
-        const rarityClass = getRarityClass(ingredient.rarity);
-        const typeImg = getTypeImg(ingredient.type);
-        const rarityImg = getRarityImg(ingredient.rarity);
-        const totalPrice = getTotalPrice(ingredient.name);
+    <>
+        <div className={styles.ingredientsContainer}>
+          {filteredIngredients.map((ingredient) => {
+            const price = prices[ingredient.name] !== undefined ? prices[ingredient.name] : 'N/A';
+            const isPriority = ingredients.indexOf(ingredient) < 5;
+            const rarityClass = getRarityClass(ingredient.rarity);
+            const typeImg = getTypeImg(ingredient.type);
+            const rarityImg = getRarityImg(ingredient.rarity);
+            const totalPrice = getTotalPrice(ingredient.name);
 
-        return (
-          <div key={ingredient.name} className={`${styles.ingredient} ${rarityClass}`}>
-            <div className={styles.ingrImage}>
-              <Image src={ingredient.imagePath} width={50} height={50} alt={ingredient.name} priority={isPriority} />
-            </div>
+            return (
+              <div key={ingredient.name} className={`${styles.ingredient} ${rarityClass}`}>
+                <div className={styles.ingrImage}>
+                  <Image src={ingredient.imagePath} width={50} height={50} alt={ingredient.name} priority={isPriority} />
+                </div>
 
-            <div className={styles.ingrTitle}>
-              <button onClick={() => handleIngredientClick(ingredient)} className={styles.buttonWithOverlay}>{ingredient.name}</button>
-              <div className={styles.ingrTypeAndRarity}>
-                <p>{typeImg} {ingredient.type}</p>
-                <p>{rarityImg} {ingredient.rarity}</p>
+                <div className={styles.ingrTitle}>
+                  <button onClick={() => handleIngredientClick(ingredient)} className={styles.buttonWithOverlay}>{ingredient.name}</button>
+                  <div className={styles.ingrTypeAndRarity}>
+                    <p>{typeImg} {ingredient.type}</p>
+                    <p>{rarityImg} {ingredient.rarity}</p>
+                  </div>
+                </div>
+
+                <div className={styles.ingrHandle}>
+                  <div className={styles.counter}>
+                    <button onClick={() => increment(ingredient.name, -10)}>-10</button>
+                    <button onClick={() => increment(ingredient.name, -1)}>-1</button>
+                    <button onClick={() => increment(ingredient.name, 1)}><strong>+1</strong></button>
+                    <button onClick={() => increment(ingredient.name, 10)}><strong>+10</strong></button>
+                    <button onClick={() => resetCounter(ingredient.name)}>Reset</button>
+                  </div>
+
+                  <div className={styles.quantity}>
+                    <p><strong>Quantity : </strong><span>{quantities[ingredient.name]}</span></p>
+                  </div>
+
+                  <div className={styles.price}>
+                    <p><strong>Starting price : </strong><span>{price}</span></p>
+                  </div>
+
+                  <div className={styles.totalPrice}>
+                    <p><strong>Total price : </strong><span>{totalPrice}</span></p>
+                  </div>
+
+                </div>
               </div>
-            </div>
-
-            <div className={styles.ingrHandle}>
-              <div className={styles.counter}>
-                <button onClick={() => increment(ingredient.name, -10)}>-10</button>
-                <button onClick={() => increment(ingredient.name, -1)}>-1</button>
-                <button onClick={() => increment(ingredient.name, 1)}><strong>+1</strong></button>
-                <button onClick={() => increment(ingredient.name, 10)}><strong>+10</strong></button>
-                <button onClick={() => resetCounter(ingredient.name)}>Reset</button>
-              </div>
-
-              <div className={styles.quantity}>
-                <p><strong>Quantity : </strong><span>{quantities[ingredient.name]}</span></p>
-              </div>
-
-              <div className={styles.price}>
-                <p><strong>Starting price : </strong><span>{price}</span></p>
-              </div>
-
-              <div className={styles.totalPrice}>
-                <p><strong>Total price : </strong><span>{totalPrice}</span></p>
-              </div>
-
-            </div>
-          </div>
-        );
-      })}
-    </div>
+            );
+          })}
+        </div>
+    </>
   );
 };
 
