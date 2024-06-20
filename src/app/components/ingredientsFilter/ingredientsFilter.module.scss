@@ -33,6 +33,21 @@ $background-details: radial-gradient(
     border-bottom: 1px solid $borderCyan;
     background: $background-details;
 
+    .reset,
+    .close {
+      width: 80px;
+      height: 80px;
+      position: absolute;
+      border: none;
+      background-color: $vertFonce;
+      border-bottom: 1px solid $borderCyan;
+      transition: 0.3s;
+
+      &:hover {
+        background-color: $vertClaire;
+      }
+    }
+
     h4 {
       position: absolute;
       text-align: center;
@@ -42,15 +57,13 @@ $background-details: radial-gradient(
       transform: translate(-50%);
     }
 
-    button {
-      width: 80px;
-      height: 80px;
-      position: absolute;
+    .reset {
+      left: 0;
+      border-right: 1px solid $borderCyan;
+    }
+    .close {
       right: 0;
-      border: none;
-      background-color: $vertFonce;
       border-left: 1px solid $borderCyan;
-      border-bottom: 1px solid $borderCyan;
     }
   }
 
@@ -80,7 +93,8 @@ $background-details: radial-gradient(
       box-shadow: 4px 4px 8px transparent;
       transition: 0.3s;
 
-      &:hover {
+      &:hover,
+      &.typeActive {
         border: 1px solid orange;
         box-shadow: 4px 4px 8px orange;
       }

@@ -47,6 +47,11 @@ const Market: React.FC<onCloseClickProps> = ({ onCloseClick }) => {
         setShowFilter(false)
     })
 
+    const handleReset = (rarity: string | null, type: string | null) => {
+        setSelectedRarity(rarity);
+        setSelectedType(type);
+    };
+
     return (
         <section className={styles.market}>
             <div className={styles.modal}>
@@ -60,14 +65,14 @@ const Market: React.FC<onCloseClickProps> = ({ onCloseClick }) => {
                 </div>
 
                 <div className={`${styles.list} ${styles.filter} ${styles.details}`}>
-                    <IngredientsListMarket onIngredientClick={handleIngredientClick} selectedRarity={selectedRarity} selectedType={selectedType} />
+                    <IngredientsListMarket onIngredientClick={handleIngredientClick} selectedType={selectedType} selectedRarity={selectedRarity} />
 
                     {showDetails && selectedIngredient && (
                         <Details ingredientName={selectedIngredient} onClose={handleCloseDetails} />
                     )}
 
                     {showFilter && (
-                        <IngredientsFilter onClose={handleCloseFilter} onRarityChange={setSelectedRarity} onTypeChange={setSelectedType} />
+                        <IngredientsFilter onClose={handleCloseFilter} onTypeChange={setSelectedType} onRarityChange={setSelectedRarity} onReset={() => handleReset(null, null)} />
                     )}
                 </div>
 

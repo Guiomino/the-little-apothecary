@@ -133,8 +133,8 @@ const IngredientsListMarket: React.FC<IngredientsListMarketProps> = ({ onIngredi
   };
 
   const filteredIngredients = ingredients
-  .filter(ingredient => selectedRarity ? ingredient.rarity === selectedRarity : true)
-  .filter(ingredient => selectedType ? ingredient.type === selectedType : true);
+    .filter(ingredient => selectedRarity ? ingredient.rarity === selectedRarity : true)
+    .filter(ingredient => selectedType ? ingredient.type === selectedType : true);
 
 
   return (
