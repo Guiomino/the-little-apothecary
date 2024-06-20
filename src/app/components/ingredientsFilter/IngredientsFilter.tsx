@@ -8,12 +8,16 @@ import RangeSlider from './RangeSlider';
 interface FilterProps {
     onClose: () => void;
     onRarityChange: (rarity: string | null) => void;
+    onTypeChange: (type: string | null) => void;
 };
 
-const IngredientsFilter: React.FC<FilterProps> = ({ onClose, onRarityChange }) => {
+const IngredientsFilter: React.FC<FilterProps> = ({ onClose, onRarityChange, onTypeChange }) => {
 
     const handleRarityClick = (rarity: string | null) => {
         onRarityChange(rarity)
+    };
+    const handleTypeClick = (type: string | null) => {
+        onTypeChange(type)
     };
 
     return (
@@ -28,19 +32,19 @@ const IngredientsFilter: React.FC<FilterProps> = ({ onClose, onRarityChange }) =
                     <h5>Type</h5>
                     <div>
                         <div className={styles.tooltip}>
-                            <button><Image src={"/images/Type/Type_Mineral.png"} width={20} height={20} alt='Mineral' /></button>
+                            <button onClick={() => onTypeChange("Mineral")}><Image src={"/images/Type/Type_Mineral.png"} width={20} height={20} alt='Mineral' /></button>
                             <div className={styles.tooltipText}>Mineral</div>
                         </div>
                         <div className={styles.tooltip}>
-                            <button><Image src={"/images/Type/Type_Vegetal.png"} width={20} height={20} alt='Vegetal' /></button>
+                            <button onClick={() => onTypeChange("Vegetal")}><Image src={"/images/Type/Type_Vegetal.png"} width={20} height={20} alt='Vegetal' /></button>
                             <div className={styles.tooltipText}>Vegetal</div>
                         </div>
                         <div className={styles.tooltip}>
-                            <button><Image src={"/images/Type/Type_Animal.png"} width={20} height={20} alt='Animal' /></button>
+                            <button onClick={() => onTypeChange("Animal")}><Image src={"/images/Type/Type_Animal.png"} width={20} height={20} alt='Animal' /></button>
                             <div className={styles.tooltipText}>Animal</div>
                         </div>
                         <div className={styles.tooltip}>
-                            <button><Image src={"/images/Type/Type_Mushroom.png"} width={20} height={20} alt='Mushroom' /></button>
+                            <button onClick={() => onTypeChange("Mushroom")}><Image src={"/images/Type/Type_Mushroom.png"} width={20} height={20} alt='Mushroom' /></button>
                             <div className={styles.tooltipText}>Mushroom</div>
                         </div>
                     </div>

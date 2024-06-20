@@ -28,6 +28,7 @@ const Market: React.FC<onCloseClickProps> = ({ onCloseClick }) => {
     const [showDetails, setShowDetails] = useState<boolean>(false);
     const [showFilter, setShowFilter] = useState<boolean>(false);
     const [selectedRarity, setSelectedRarity] = useState<string | null>(null);
+    const [selectedType, setSelectedType] = useState<string | null>(null);
 
     const handleIngredientClick = (ingredient: IngredientClass) => {
         setSelectedIngredient(ingredient.name);
@@ -59,14 +60,14 @@ const Market: React.FC<onCloseClickProps> = ({ onCloseClick }) => {
                 </div>
 
                 <div className={`${styles.list} ${styles.filter} ${styles.details}`}>
-                    <IngredientsListMarket onIngredientClick={handleIngredientClick} selectedRarity={selectedRarity} />
+                    <IngredientsListMarket onIngredientClick={handleIngredientClick} selectedRarity={selectedRarity} selectedType={selectedType} />
 
                     {showDetails && selectedIngredient && (
                         <Details ingredientName={selectedIngredient} onClose={handleCloseDetails} />
                     )}
 
                     {showFilter && (
-                        <IngredientsFilter onClose={handleCloseFilter} onRarityChange={setSelectedRarity} />
+                        <IngredientsFilter onClose={handleCloseFilter} onRarityChange={setSelectedRarity} onTypeChange={setSelectedType} />
                     )}
                 </div>
 
