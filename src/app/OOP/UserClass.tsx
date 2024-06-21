@@ -17,7 +17,7 @@ class UserClass {
         this.id = uuidv4();
         this.avatars = avatars;
         this.username = username;
-        this.gold = 0;
+        this.gold = 5000; // Initial gold value
         this.medals = 0;
         this.level = 1;
         this.experience = 0;
@@ -64,7 +64,13 @@ class UserClass {
         const userData = localStorage.getItem('userData');
         if (userData) {
             const parsedUserData = JSON.parse(userData);
-            return new UserClass(parsedUserData.avatars, parsedUserData.username);
+            const user = new UserClass(parsedUserData.avatars, parsedUserData.username);
+            user.gold = parsedUserData.gold; // Restore gold value
+            user.medals = parsedUserData.medals;
+            user.level = parsedUserData.level;
+            user.experience = parsedUserData.experience;
+            user.gameOptions = parsedUserData.gameOptions;
+            return user;
         }
         return null;
     }

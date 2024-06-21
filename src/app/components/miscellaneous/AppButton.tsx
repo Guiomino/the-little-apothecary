@@ -9,9 +9,10 @@ import AppButtonBranch from './AppButtonBranch';
 interface AppButtonProps {
   label: string;
   onClick: () => void;
+  disabled: boolean
 }
 
-const AppButton: React.FC<AppButtonProps> = ({ label, onClick }) => {
+const AppButton: React.FC<AppButtonProps> = ({ label, onClick , disabled}) => {
   return (
     <div className={styles.apothecaryBtnSet}>
 

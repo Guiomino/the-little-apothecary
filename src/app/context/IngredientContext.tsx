@@ -24,7 +24,7 @@ const saveToLocalStorage = (key: string, value: any) => {
     localStorage.setItem(key, JSON.stringify(value));
 };
 
-export const loadFromLocalStorage = (key: string) => {
+const loadFromLocalStorage = (key: string) => {
     const value = localStorage.getItem(key);
     return value ? JSON.parse(value) : null;
 };
@@ -35,8 +35,8 @@ interface IngredientContextType {
     setTotalQuantity: React.Dispatch<React.SetStateAction<number>>;
     totalPrice: number;
     setTotalPrice: React.Dispatch<React.SetStateAction<number>>;
-    cartItem: { ingredient: Ingredient; quantity: number }[];
-    setCartItem: React.Dispatch<React.SetStateAction<{ ingredient: Ingredient; quantity: number }[]>>;
+    cartItems: { ingredient: Ingredient; quantity: number }[];
+    setCartItems: React.Dispatch<React.SetStateAction<{ ingredient: Ingredient; quantity: number }[]>>;
     quantities: { [name: string]: number };
     setQuantities: React.Dispatch<React.SetStateAction<{ [name: string]: number }>>;
     resetCounter: (name: string) => void;
@@ -73,7 +73,7 @@ export const useCartItems = () => {
     if (!context) {
         throw new Error('useCartItems must be used within an IngredientProvider');
     }
-    return [context.cartItem, context.setCartItem] as const;
+    return [context.cartItems, context.setCartItems] as const;
 };
 
 export const useQuantities = () => {
@@ -96,7 +96,7 @@ const IngredientProvider: React.FC<IngredientProviderProps> = ({ children }) => 
     const [ingredients, setIngredients] = useState<Ingredient[]>([]);
     const [totalQuantity, setTotalQuantity] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
-    const [cartItem, setCartItem] = useState<{ ingredient: Ingredient; quantity: number }[]>([]);
+    const [cartItems, setCartItems] = useState<{ ingredient: Ingredient; quantity: number }[]>([]);
     const [quantities, setQuantities] = useState<{ [name: string]: number }>({});
 
     useEffect(() => {
@@ -127,6 +127,17 @@ const IngredientProvider: React.FC<IngredientProviderProps> = ({ children }) => 
         }
     }, [ingredients]);
 
+
+    useEffect(() => {
+        const ingredientPrices = JSON.parse(localStorage.getItem('ingredientPrices') || '{}');
+        const price = cartItems.reduce((acc, item) => {
+            const ingredientPrice = ingredientPrices[item.ingredient.name];
+            return acc + ingredientPrice * item.quantity;
+        }, 0);
+        setTotalPrice(price);
+    }, [cartItems]);
+
+    
     const resetCounter = (name: string) => {
         setQuantities(prev => ({
             ...prev,
@@ -135,7 +146,7 @@ const IngredientProvider: React.FC<IngredientProviderProps> = ({ children }) => 
     };
 
     return (
-        <IngredientContext.Provider value={{ ingredients, totalQuantity, setTotalQuantity, totalPrice, setTotalPrice, cartItem, setCartItem, quantities, setQuantities, resetCounter }}>
+        <IngredientContext.Provider value={{ ingredients, totalQuantity, setTotalQuantity, totalPrice, setTotalPrice, cartItems, setCartItems, quantities, setQuantities, resetCounter }}>
             {children}
         </IngredientContext.Provider>
     );
