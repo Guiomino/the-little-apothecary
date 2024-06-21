@@ -1,5 +1,3 @@
-// Market.tsx
-
 "use client"
 
 import React, { useState } from 'react';
@@ -16,6 +14,7 @@ import styles from "@/app/components/market/market.module.scss"
 import Details from '../details/Details';
 import IngredientClass from "@/app/OOP/IngredientClass";
 import IngredientsFilter from '../ingredientsFilter/IngredientsFilter';
+import { useCartItems } from '@/app/context/IngredientContext';
 
 interface onCloseClickProps {
     onCloseClick: () => void
@@ -23,6 +22,7 @@ interface onCloseClickProps {
 
 const Market: React.FC<onCloseClickProps> = ({ onCloseClick }) => {
     const [goldCoins, setGoldCoins] = useState(5000);
+    const [cartItems, setCartItems] = useCartItems();
 
     const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
     const [showDetails, setShowDetails] = useState<boolean>(false);
@@ -39,17 +39,47 @@ const Market: React.FC<onCloseClickProps> = ({ onCloseClick }) => {
         setShowDetails(false);
     };
 
-    const handleFilterClick = (() => {
+    const handleFilterClick = () => {
         setShowFilter(true)
-    });
+    };
 
-    const handleCloseFilter = (() => {
+    const handleCloseFilter = () => {
         setShowFilter(false)
-    })
+    };
 
     const handleReset = (rarity: string | null, type: string | null) => {
         setSelectedRarity(rarity);
         setSelectedType(type);
+    };
+
+    const saveToLocalStorage = (key: string, value: any) => {
+        localStorage.setItem(key, JSON.stringify(value));
+    };
+
+    const loadFromLocalStorage = (key: string) => {
+        const value = localStorage.getItem(key) as string | null;
+        return value ? JSON.parse(value) : [];
+    };
+
+    const handleBuy = () => {
+        const existingInventory = loadFromLocalStorage('UserIngredientStock') as any[];
+        const updatedInventory = [...existingInventory];
+
+        cartItems.forEach((cartItem) => {
+            const index = updatedInventory.findIndex(item => item.ingredient.name === cartItem.ingredient.name);
+            if (index > -1) {
+                updatedInventory[index].quantity += cartItem.quantity;
+            } else {
+                updatedInventory.push(cartItem);
+            }
+        });
+
+        saveToLocalStorage('UserIngredientStock', updatedInventory);
+        setCartItems([]);
+
+        // Settimeout 800ms avant fermeture + indication d'achat UI
+        // Fermeture modale après 800ms
+        // Maj du stock d'Or (Total acutel - prix total du panier)
     };
 
     return (
@@ -83,15 +113,13 @@ const Market: React.FC<onCloseClickProps> = ({ onCloseClick }) => {
                 </div>
 
                 <div className={styles.cartList}>
-                    <CartList />
+                    <CartList onBuy={handleBuy} />
                 </div>
 
                 <div className={styles.cartListBtn}>
                     <AppButton
                         label="💰 Buy"
-                        onClick={() => {
-                            // Logique d'achat ou autre
-                        }}
+                        onClick={handleBuy}
                     />
                 </div>
             </div>

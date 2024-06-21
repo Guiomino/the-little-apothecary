@@ -12,14 +12,18 @@ const loadFromLocalStorage = (key: string) => {
   return value ? JSON.parse(value) : null;
 };
 
-const CartList: React.FC = () => {
+const saveToLocalStorage = (key: string, value: any) => {
+  localStorage.setItem(key, JSON.stringify(value));
+};
+
+const CartList: React.FC<{ onBuy: () => void }> = ({ onBuy }) => {
   const [cartItems, setCartItems] = useCartItems();
   const [prices, setPrices] = useState<{ [key: string]: number }>({});
   const resetCounter = useResetCounter();
 
   useEffect(() => {
     const storedPrices = loadFromLocalStorage('ingredientPrices');
-    if (storedPrices && typeof storedPrices === 'object') { // Vérifier si storedPrices est un 'objet'
+    if (storedPrices && typeof storedPrices === 'object') {
       const priceMap = Object.keys(storedPrices).reduce((acc: { [key: string]: number }, key: string) => {
         const ingredientName = cartItems.find(item => item.ingredient.name === key)?.ingredient.name;
         if (ingredientName) {
@@ -30,7 +34,6 @@ const CartList: React.FC = () => {
       setPrices(priceMap);
     }
   }, [cartItems]);
-
 
   const removeFromCart = (index: number) => {
     setCartItems(prevCartItems => {
