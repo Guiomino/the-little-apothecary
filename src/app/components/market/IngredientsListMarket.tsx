@@ -1,6 +1,6 @@
 // IngredientsListMarket.tsx
 
-"use client"
+"use client";
 
 import React, { useState, useEffect } from 'react';
 import { useCartItems, useIngredients, useTotalPrice, useTotalQuantity, useResetCounter, useQuantities } from '@/app/context/IngredientContext';
@@ -27,7 +27,6 @@ const IngredientsListMarket: React.FC<IngredientsListMarketProps> = ({ onIngredi
   const [totalPrice, setTotalPrice] = useTotalPrice();
   const [cartItems, setCartItems] = useCartItems();
   const resetCounter = useResetCounter();
-  const [prices, setPrices] = useState<{ [name: string]: number }>({});
   const [loading, setLoading] = useState(true);
 
   const handleIngredientClick = (ingredient: IngredientClass) => {
@@ -38,14 +37,15 @@ const IngredientsListMarket: React.FC<IngredientsListMarketProps> = ({ onIngredi
   useEffect(() => {
     const storedPrices = loadFromLocalStorage('ingredientPrices');
     if (storedPrices) {
-      setPrices(storedPrices);
+      ingredients.forEach(ingredient => {
+        ingredient.price = storedPrices[ingredient.name] || ingredient.price;
+      });
     } else {
       const newPrices: { [name: string]: number } = {};
       ingredients.forEach(ingredient => {
-        newPrices[ingredient.name] = IngredientClass.generateRandomPrice(ingredient.priceRange[0], ingredient.priceRange[1]);
+        newPrices[ingredient.name] = ingredient.price;
       });
       localStorage.setItem('ingredientPrices', JSON.stringify(newPrices));
-      setPrices(newPrices);
     }
 
     const initialQuantities: { [name: string]: number } = {};
@@ -61,7 +61,7 @@ const IngredientsListMarket: React.FC<IngredientsListMarketProps> = ({ onIngredi
     setTotalQuantity(total);
 
     const totalPrice = ingredients.reduce((sum, ingredient) =>
-      sum + (quantities[ingredient.name] * (prices[ingredient.name] || 0)), 0);
+      sum + (quantities[ingredient.name] * (ingredient.price || 0)), 0);
     setTotalPrice(totalPrice);
 
     const updatedCartItems = ingredients.map(ingredient => ({
@@ -69,7 +69,7 @@ const IngredientsListMarket: React.FC<IngredientsListMarketProps> = ({ onIngredi
       quantity: quantities[ingredient.name],
     })).filter(item => item.quantity > 0);
     setCartItems(updatedCartItems);
-  }, [quantities, prices, setTotalQuantity, setTotalPrice, ingredients, setCartItems]);
+  }, [quantities, setTotalQuantity, setTotalPrice, ingredients, setCartItems]);
 
   const increment = (name: string, amount: number) => {
     setQuantities(prev => ({
@@ -79,13 +79,12 @@ const IngredientsListMarket: React.FC<IngredientsListMarketProps> = ({ onIngredi
   };
 
   const getTotalPrice = (name: string) => {
-    return quantities[name] * (prices[name] || 0);
+    return quantities[name] * (ingredients.find(ingredient => ingredient.name === name)?.price || 0);
   };
 
   if (loading) {
     return <div>Loading...</div>;
   };
-
 
   const getRarityClass = (rarity: string) => {
     switch (rarity) {
@@ -136,12 +135,11 @@ const IngredientsListMarket: React.FC<IngredientsListMarketProps> = ({ onIngredi
     .filter(ingredient => selectedRarity ? ingredient.rarity === selectedRarity : true)
     .filter(ingredient => selectedType ? ingredient.type === selectedType : true);
 
-
   return (
     <>
       <div className={styles.ingredientsContainer}>
         {filteredIngredients.map((ingredient) => {
-          const price = prices[ingredient.name] !== undefined ? prices[ingredient.name] : 'N/A';
+          const price = ingredient.price !== undefined ? ingredient.price : 'N/A';
           const isPriority = ingredients.indexOf(ingredient) < 5;
           const rarityClass = getRarityClass(ingredient.rarity);
           const typeImg = getTypeImg(ingredient.type);

@@ -5,17 +5,25 @@
 import React, { useEffect, useState } from 'react';
 import styles from "./miscellaneous.module.scss";
 import Image from 'next/image';
+import UserClass from '@/app/OOP/UserClass';
 
 interface GoldCoinsProps {
-  goldCoins: number;
+  initialGoldCoins: number;
 }
 
-const GoldCoins: React.FC<GoldCoinsProps> = ({ goldCoins }) => {
-  const [currentGold, setCurrentGold] = useState(goldCoins);
+const GoldCoins: React.FC<GoldCoinsProps> = ({ initialGoldCoins }) => {
+  const [currentGold, setCurrentGold] = useState(initialGoldCoins);
 
   useEffect(() => {
-    setCurrentGold(goldCoins);
-  }, [goldCoins]);
+    setCurrentGold(initialGoldCoins);
+  }, [initialGoldCoins]);
+
+  useEffect(() => {
+    const user = UserClass.loadFromLocalStorage();
+    if (user) {
+      setCurrentGold(user.gold);
+    }
+  }, []);
 
   return (
     <p className={styles.goldSection}>

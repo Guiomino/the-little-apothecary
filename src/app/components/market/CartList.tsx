@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { useCartItems, useResetCounter } from '@/app/context/IngredientContext';
 import Image from 'next/image';
 import styles from "./market.module.scss";
+import IngredientClass from '@/app/OOP/IngredientClass';
 
 const loadFromLocalStorage = (key: string) => {
   const value = localStorage.getItem(key) as string | null;
@@ -18,8 +19,8 @@ const saveToLocalStorage = (key: string, value: any) => {
 
 const CartList: React.FC<{ onBuy: () => void }> = ({ onBuy }) => {
   const [cartItems, setCartItems] = useCartItems();
-  const [prices, setPrices] = useState<{ [key: string]: number }>({});
   const resetCounter = useResetCounter();
+  const [prices, setPrices] = useState<{ [key: string]: number }>({});
 
   useEffect(() => {
     const storedPrices = loadFromLocalStorage('ingredientPrices');
@@ -83,7 +84,9 @@ const CartList: React.FC<{ onBuy: () => void }> = ({ onBuy }) => {
           {cartItems.map((item, index) => {
             const rarityImg = getRarityImg(item.ingredient.rarity);
             const typeImg = getTypeImg(item.ingredient.type);
-            const ingredientPrice = prices[item.ingredient.name] || item.ingredient.priceRange[0];
+            const ingredientPrice = item.ingredient.price !== undefined ? item.ingredient.price : prices[item.ingredient.name] || 0;
+            const totalPrice = item.quantity * ingredientPrice;
+
             return (
               <li className={styles.cartItem} key={index}>
 
@@ -99,7 +102,7 @@ const CartList: React.FC<{ onBuy: () => void }> = ({ onBuy }) => {
 
                 <div className={styles.cartItemDetails}>
                   <p>Quantity : {item.quantity}</p>
-                  <p>Price : {(item.quantity * ingredientPrice)}</p>
+                  <p>Price : {totalPrice}</p>
                 </div>
 
                 <div className={styles.cartItemRemove}>

@@ -2,7 +2,7 @@
 
 "use client"
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import FilterIngredients from '@/app/components/miscellaneous/FilterIngredients';
 import GoldCoins from '@/app/components/miscellaneous/GoldCoins';
 import LevelUser from '@/app/components/miscellaneous/LevelUser';
@@ -20,11 +20,13 @@ import { useCartItems, useTotalPrice, useTotalQuantity } from '@/app/context/Ing
 import UserClass from '@/app/OOP/UserClass';
 
 interface onCloseClickProps {
-    onCloseClick: () => void
-};
+    onCloseClick: () => void;
+}
 
 const Market: React.FC<onCloseClickProps> = ({ onCloseClick }) => {
-    const user = UserClass.loadFromLocalStorage() || new UserClass([], "Guest");
+    const userRef = useRef(UserClass.loadFromLocalStorage() || new UserClass([], "Guest"));
+    const user = userRef.current;
+
     const [goldCoins, setGoldCoins] = useState(user.gold);
     const [cartItems, setCartItems] = useCartItems();
     const [totalPrice, setTotalPrice] = useTotalPrice();
@@ -41,7 +43,7 @@ const Market: React.FC<onCloseClickProps> = ({ onCloseClick }) => {
     useEffect(() => {
         user.gold = goldCoins;
         user.saveToLocalStorage();
-    }, [goldCoins]);
+    }, [goldCoins, user]);
 
     const handleIngredientClick = (ingredient: IngredientClass) => {
         setSelectedIngredient(ingredient.name);
@@ -53,11 +55,11 @@ const Market: React.FC<onCloseClickProps> = ({ onCloseClick }) => {
     };
 
     const handleFilterClick = () => {
-        setShowFilter(true)
+        setShowFilter(true);
     };
 
     const handleCloseFilter = () => {
-        setShowFilter(false)
+        setShowFilter(false);
     };
 
     const handleReset = (rarity: string | null, type: string | null) => {
@@ -76,7 +78,7 @@ const Market: React.FC<onCloseClickProps> = ({ onCloseClick }) => {
 
     const calculateTotalPrice = () => {
         return cartItems.reduce((total, item) => {
-            const ingredientPrice = item.ingredient.priceRange[0]; // Assuming priceRange[0] is the price per unit
+            const ingredientPrice = item.ingredient.price !== undefined ? item.ingredient.price : 0;
             return total + item.quantity * ingredientPrice;
         }, 0);
     };
@@ -135,7 +137,7 @@ const Market: React.FC<onCloseClickProps> = ({ onCloseClick }) => {
 
                 <div className={styles.top}>
                     <FilterIngredients onFilterClick={handleFilterClick} />
-                    <GoldCoins goldCoins={goldCoins} />
+                    <GoldCoins initialGoldCoins={goldCoins} />
                     <h2>Market</h2>
                     <LevelUser />
                     <CloseModal onClick={onCloseClick} />
