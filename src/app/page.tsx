@@ -7,6 +7,7 @@ import IngredientProvider from "./context/IngredientContext";
 import Market from "./components/market/Market";
 import { useState } from "react";
 import OpenModalButton from "@/app/components/miscellaneous/OpenModalButton";
+import Cabinet from "./components/cabinet/Cabinet";
 
 export default function Home() {
 
@@ -19,9 +20,11 @@ export default function Home() {
       <IngredientProvider>
         <main className={styles.mainPage}>
           <h1>The Little Apothecary</h1>
+
           <div className={styles.OpenModalButton}>
             <OpenModalButton onClick={modalOpenHandler} label="🧺" />
           </div>
+
           {
             isdisplayed && (
               <>
@@ -29,6 +32,8 @@ export default function Home() {
               </>
             )
           }
+
+          <Cabinet />
 
         </main>
       </IngredientProvider>

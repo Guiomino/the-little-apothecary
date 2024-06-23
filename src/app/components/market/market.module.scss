@@ -3,12 +3,13 @@ $vertClaire: #003c43;
 $borderCyan: #00eaff;
 
 .market {
+  z-index: 10; // Pour passer au dessus de Cabinet component
   width: 100vw;
   height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #333333ee;
+  background-color: #333333cc;
 
   .modal {
     width: calc(100% - 40px);

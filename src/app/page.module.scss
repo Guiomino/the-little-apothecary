@@ -1,11 +1,40 @@
+// page.module.scss
+
 .mainPage {
+  position: relative;
   width: 100vw;
   height: 100vh;
-  background-color: #333;
+  overflow: hidden;
+  background-image: url("/images/Ambient_Background.jpg");
+  background-size: cover;
+  background-position: center;
+}
 
-  .OpenModalButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.mainPage::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00000055;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 1;
+}
+
+// Modif styles sans flou ni sombre
+.mainPage > * {
+  position: relative; /* les enfants directs de .mainPage sont positionnés correctement */
+  z-index: 2; /* le contenu est au-dessus du pseudo-élément */
+}
+
+.mainPage h1 {
+  position: relative;
+}
+
+.OpenModalButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
