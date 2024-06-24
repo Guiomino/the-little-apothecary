@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useIngredients } from "../../context/IngredientContext";
 import styles from "./apothecaryCabinet.module.scss";
 import CabinetModal from "./CabinetModal";
+import Candles from "../miscellaneous/Candles";
 
 interface ApothecaryCabinetProps {
     onOpenModal: (type: string, ingredients: any[]) => void;
@@ -34,6 +35,15 @@ const ApothecaryCabinet: React.FC<ApothecaryCabinetProps> = ({ onOpenModal }) =>
 
     return (
         <div className={styles.apothecaryContainer}>
+
+            <div className={styles.candles}>
+            <div className={styles.candle1}><Candles /></div>
+            <div className={styles.candle2}><Candles /></div>
+            <div className={styles.candle3}><Candles /></div>
+            <div className={styles.candle4}><Candles /></div>
+            <div className={styles.candle5}><Candles /></div>
+            </div>
+
             <div className={styles.apothecaryTable}></div>
 
             <div className={styles.apothecaryCabinet}>

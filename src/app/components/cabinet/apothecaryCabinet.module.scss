@@ -12,6 +12,47 @@
   flex-direction: column;
   justify-content: flex-end;
 
+  // CANDLE
+  .candles {
+    position: relative;
+    width: 85%;
+
+    .candle1 {
+      position: absolute;
+      bottom: 90px;
+      left: 0%;
+      scale: 130%;
+      filter: hue-rotate(220deg);
+    }
+    .candle2 {
+      position: absolute;
+      bottom: 0;
+      left: 6%;
+    }
+    .candle3 {
+      position: absolute;
+      bottom: 60px;
+      left: 10%;
+      scale: 120%;
+      filter: hue-rotate(270deg);
+    }
+    .candle4 {
+      position: absolute;
+      bottom: 0;
+      right: 5%;
+      filter: hue-rotate(90deg);
+      transform: scaleX(-1);
+    }
+    .candle5 {
+      position: absolute;
+      bottom: 60px;
+      right: 0%;
+      scale: 120%;
+      filter: hue-rotate(290deg);
+      transform: scaleX(-1);
+    }
+  }
+
   .feet {
     width: 100%;
     max-width: 680px;
