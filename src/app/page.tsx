@@ -1,4 +1,4 @@
-// pages.tsx
+// page.tsx
 
 "use client"
 
@@ -7,13 +7,27 @@ import IngredientProvider from "./context/IngredientContext";
 import Market from "./components/market/Market";
 import { useState } from "react";
 import OpenModalButton from "@/app/components/miscellaneous/OpenModalButton";
-import Cabinet from "./components/cabinet/Cabinet";
+import ApothecaryCabinet from "./components/cabinet/ApothecaryCabinet";
+import CabinetModal from "./components/cabinet/CabinetModal";
+import { Ingredient } from "./components/cabinet/CabinetModal";
 
 export default function Home() {
-
-  const [isdisplayed, setIsDisplayed] = useState(false);
-  const modalOpenHandler = () => setIsDisplayed(!isdisplayed);
+  const [isDisplayed, setIsDisplayed] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedIngredients, setSelectedIngredients] = useState<Ingredient[]>([]);
+  
+  const modalOpenHandler = () => setIsDisplayed(!isDisplayed);
   const modalCloseHandler = () => setIsDisplayed(false);
+
+  const openCabinetModal = (type: string, ingredients: any[]) => {
+    setSelectedIngredients(ingredients);
+    setModalIsOpen(true);
+  };
+
+  const closeCabinetModal = () => {
+    setSelectedIngredients([]);
+    setModalIsOpen(false);
+  };
 
   return (
     <>
@@ -25,16 +39,24 @@ export default function Home() {
             <OpenModalButton onClick={modalOpenHandler} label="🧺" />
           </div>
 
-          {
-            isdisplayed && (
-              <>
-                <Market onCloseClick={modalCloseHandler} />
-              </>
-            )
-          }
+          {isDisplayed && (
+            <>
+              <Market onCloseClick={modalCloseHandler} />
+            </>
+          )}
 
-          <Cabinet />
+          <div className={styles.apothecaryCabinet}>
+            <ApothecaryCabinet onOpenModal={openCabinetModal} />
+          </div>
 
+          {modalIsOpen && (
+            <>
+              <CabinetModal
+                ingredients={selectedIngredients}
+                onCloseClick={closeCabinetModal}
+              />
+            </>
+          )}
         </main>
       </IngredientProvider>
     </>

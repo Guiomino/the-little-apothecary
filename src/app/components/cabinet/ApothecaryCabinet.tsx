@@ -1,27 +1,35 @@
-// Cabinet.tsx
+// ApothecaryCabinet.tsx
 
 "use client"
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useIngredients } from "../../context/IngredientContext";
-import styles from "./cabinet.module.scss";
+import styles from "./apothecaryCabinet.module.scss";
 import CabinetModal from "./CabinetModal";
 
-interface ApothecaryCabinetProps { }
+interface ApothecaryCabinetProps {
+    onOpenModal: (type: string, ingredients: any[]) => void;
+}
 
-const ApothecaryCabinetComponent: React.FC<ApothecaryCabinetProps> = () => {
-    const [modalOpen, setModalOpen] = useState(false);
-    const [selectedType, setSelectedType] = useState<string | null>(null);
+const ApothecaryCabinet: React.FC<ApothecaryCabinetProps> = ({ onOpenModal }) => {
+    const [storedIngredients, setStoredIngredients] = useState<any[]>([]);
     const ingredients = useIngredients();
 
-    const openCabinetModal = (type: string) => {
-        setSelectedType(type);
-        setModalOpen(true);
+    const loadFromLocalStorage = (key: string) => {
+        const value = localStorage.getItem(key);
+        return value ? JSON.parse(value) : [];
     };
 
-    const closeModal = () => {
-        setModalOpen(false);
-        setSelectedType(null);
+    useEffect(() => {
+        const storedItems = loadFromLocalStorage("UserIngredientStock");
+        setStoredIngredients(storedItems);
+    }, []);
+
+    const openCabinetModal = (type: string) => {
+        const filteredIngredients = storedIngredients.filter(
+            (ingredient) => ingredient.ingredient.type === type
+        );
+        onOpenModal(type, filteredIngredients);
     };
 
     return (
@@ -72,18 +80,12 @@ const ApothecaryCabinetComponent: React.FC<ApothecaryCabinetProps> = () => {
                             <div className={styles.handle}></div>
                         </div>
                     </button>
+
                 </div>
             </div>
             <div className={styles.feet}></div>
-
-            {modalOpen && selectedType && (
-                <CabinetModal
-                    ingredients={ingredients.filter(ingredient => ingredient.type === selectedType)}
-                    onClose={closeModal}
-                />
-            )}
         </div>
     );
 };
 
-export default ApothecaryCabinetComponent;
+export default ApothecaryCabinet;

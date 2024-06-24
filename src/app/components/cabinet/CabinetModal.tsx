@@ -1,30 +1,33 @@
 // CabinetModal.tsx
 
 import React from "react";
-import Ingredient from "../../OOP/IngredientClass";
+import IngredientsListCabinet from "./IngredientsListCabinet";
 import styles from "./cabinetModal.module.scss";
+
+export interface Ingredient {
+    ingredient: {
+        name: string;
+        type: string;
+        rarity: string;
+        description: string;
+        imagePath: string;
+        successRate: number;
+        price: number;
+    };
+    quantity: number;
+}
 
 interface CabinetModalProps {
     ingredients: Ingredient[];
-    onClose: () => void;
+    onCloseClick: () => void;
 }
 
-const CabinetModal: React.FC<CabinetModalProps> = ({ ingredients, onClose }) => {
+const CabinetModal: React.FC<CabinetModalProps> = ({ ingredients, onCloseClick }) => {
     return (
         <div className={styles.modalOverlay}>
             <div className={styles.modal}>
-                <button className={styles.closeButton} onClick={onClose}>X</button>
-                <h2>Ingrédients</h2>
-                <ul>
-                    {ingredients.map((ingredient, index) => (
-                        <li key={index}>
-                            <h3>{ingredient.name}</h3>
-                            <p>{ingredient.description}</p>
-                            <p>Rarity: {ingredient.rarity}</p>
-                            <p>Price: {ingredient.price}</p>
-                        </li>
-                    ))}
-                </ul>
+                <button className={styles.closeButton} onClick={onCloseClick}>X</button>
+                <IngredientsListCabinet ingredients={ingredients} />
             </div>
         </div>
     );
