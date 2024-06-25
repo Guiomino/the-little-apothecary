@@ -73,9 +73,9 @@ const CabinetModal: React.FC<CabinetModalProps> = ({ ingredients, onCloseClick }
 
 
                 <div className={styles.summary}>
-                    <p><strong>Starting price : </strong><span>95</span></p>
+                    <p><strong>Starting price : </strong><span>0</span></p>
                     <h2>Selection</h2>
-                    <p><strong>Selling price : </strong><span>115</span></p>
+                    <p><strong>Selling price : </strong><span>0</span></p>
                 </div>
 
                 <div className={styles.cartList}>
@@ -84,8 +84,8 @@ const CabinetModal: React.FC<CabinetModalProps> = ({ ingredients, onCloseClick }
 
 
                 <div className={styles.chanceOfProfit}>
-                    <p><strong>Profit : </strong><span>20</span></p>
-                    <p><strong>Success rate : </strong><span>72%</span></p>
+                    <p><strong>Profit : </strong><span>0</span></p>
+                    <p><strong>Success rate : </strong><span>0%</span></p>
                 </div>
 
 

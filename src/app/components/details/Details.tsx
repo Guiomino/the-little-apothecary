@@ -22,6 +22,7 @@ const Details: React.FC<DetailsProps> = ({ ingredientName, onClose }) => {
   const ingredients = useIngredients();
   const ingredient = ingredients.find(ingredient => ingredient.name === ingredientName);
   const [price, setPrice] = useState<number | null>(null);
+  const [stock, setStock] = useState<number | null>(null);
 
   useEffect(() => {
     const storedPrices = loadFromLocalStorage('ingredientPrices');
@@ -29,6 +30,18 @@ const Details: React.FC<DetailsProps> = ({ ingredientName, onClose }) => {
       setPrice(storedPrices[ingredient.name] || null);
     }
   }, [ingredient]);
+
+  useEffect(() => {
+    const storedQuantity = loadFromLocalStorage('UserIngredientStock');
+    if (storedQuantity && ingredient) {
+      const ingredientStock = storedQuantity.find((item: any) => item.ingredient.name === ingredientName);
+      if (ingredientStock) {
+        setStock(ingredientStock.quantity || 0);
+      } else {
+        setStock(0);
+      }
+    }
+  }, [ingredient, ingredientName]);
 
 
   if (!ingredient) {
@@ -126,7 +139,7 @@ const Details: React.FC<DetailsProps> = ({ ingredientName, onClose }) => {
         <div className={styles.description}>
           <div className={styles.PriceAndStock}>
             <p><strong>Price : </strong>{goldImage}<span>{price !== null ? price : 'N/A'}</span></p>
-            <p><strong>Stock : </strong>0</p>
+            <p><strong>Stock : </strong>{stock !== null ? stock : 'N/A'}</p>
           </div>
           <p><strong>Description : </strong>{ingredient.description}</p>
           <p><strong>Success Rate : </strong><span>{ingredient.successRate}%</span></p>
