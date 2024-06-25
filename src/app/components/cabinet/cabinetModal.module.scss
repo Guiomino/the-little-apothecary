@@ -1,31 +1,290 @@
-.modalOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
+$vertFonce: #002529;
+$vertClaire: #003c43;
+$borderCyan: #00eaff;
+
+.cabinetOverlay {
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #333333cc;
+
+  .cabinetModal {
+    width: calc(100% - 40px);
+    max-width: 800px;
+    min-width: 400px;
+    height: calc(100vh - 40px);
+    max-height: 1200px;
+    min-height: 600px;
+    background-color: $vertFonce;
+    border: 1px solid $borderCyan;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+
+    /////////////// TOP ///////////////
+    .top {
+      height: 30px;
+      display: flex;
+      justify-content: space-between;
+      background-color: $vertFonce;
+      border-bottom: 1px solid $borderCyan;
+
+      > * {
+        flex: 1;
+        &:not(:first-child):not(:last-child) {
+          flex: auto;
+        }
+      }
+
+      > *:nth-child(1) {
+        flex: 0 0 5%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      > *:nth-child(2) {
+        flex: 0 0 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-right: 1px solid white;
+      }
+
+      > *:nth-child(3) {
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 0 0 40%;
+      }
+
+      > *:nth-child(4) {
+        flex: 0 0 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-left: 1px solid white;
+      }
+
+      > *:nth-child(5) {
+        flex: 0 0 5%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+
+  /////////////// LIST and FILTER and DETAILS ///////////////
+  .list,
+  .filter,
+  .details {
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    height: 50%;
+    background-color: $vertClaire;
+    justify-content: center;
+    overflow-y: scroll;
+  }
+
+  /////////////// SUMMARY ///////////////
+  .summary {
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $vertFonce;
+    border-bottom: 1px solid $borderCyan;
+    border-top: 1px solid $borderCyan;
+
+    .cart {
+      width: 100%;
+      height: 100%;
+
+      p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+      }
+    }
+
+    > * {
+      flex: 1;
+      &:not(:first-child):not(:last-child) {
+        flex: none;
+        width: auto;
+      }
+    }
+
+    > *:nth-child(1) {
+      flex: 0 0 35%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-right: 1px solid white;
+    }
+
+    > *:nth-child(2) {
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 0 0 30%;
+    }
+
+    > *:nth-child(3) {
+      flex: 0 0 35%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-left: 1px solid white;
+    }
+  }
+
+  /////////////// CARTLIST ///////////////
+  .cartList {
+    width: 100%;
+    height: 25%;
+    background-color: $vertClaire;
+    justify-content: center;
+    overflow-y: scroll;
+    border-bottom: 1px solid $borderCyan;
+
+    // CART ITEM
+    .cart {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      ul {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin: 5px;
+
+        .cartItem {
+          width: 100%;
+          height: 60px;
+          display: flex;
+          background-color: $vertFonce;
+          border-radius: 50px;
+          border: 1px solid $borderCyan;
+
+          .cartItemImg {
+            position: relative;
+            width: 15%;
+            height: 100%;
+            padding: 5px;
+            border-right: 1px solid $borderCyan;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to top right, #22f8de 20%, #098475 80%);
+            border-radius: 50px 0 0 50px;
+
+            img {
+              filter: drop-shadow(-2px 5px 3px #00000088);
+            }
+
+            div {
+              position: absolute;
+              top: 2px;
+              right: 5px;
+            }
+          }
+
+          .cartItemTitle {
+            width: 35%;
+            height: 100%;
+            padding: 5px;
+            border-right: 1px solid $borderCyan;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: #676767;
+
+            h4 {
+              color: #b0f1f7;
+              text-transform: uppercase;
+              font-size: 12px;
+            }
+            p {
+              display: flex;
+              gap: 5px;
+            }
+          }
+
+          .cartItemDetails {
+            width: 35%;
+            padding: 5px;
+            border-right: 1px solid $borderCyan;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: #474747;
+          }
+
+          .cartItemRemove {
+            width: 15%;
+            background-color: #c62148;
+            border-radius: 0 50px 50px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            button {
+              width: 100%;
+              height: 100%;
+              border-radius: 0 50px 50px 0;
+              border: none;
+              font-size: 18px;
+              background-color: transparent;
+
+              &:hover {
+                background-color: #e24a6e;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /////////////// CHANCE OF PROFIT ///////////////
+  .chanceOfProfit {
+    width: 100%;
+    height: 10%;
+    background-color: $vertClaire;
+    justify-content: center;
+    overflow-y: scroll;
+    border-bottom: 1px solid $borderCyan;
+  }
+
+  /////////////// SUBMIT ///////////////
+  .cartListBtn {
+    position: relative;
+    width: 100%;
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
-}
 
-.modal {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 500px;
-    width: 90%;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.closeButton {
-    background: transparent;
-    border: none;
-    font-size: 1.5rem;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
+    button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
 }

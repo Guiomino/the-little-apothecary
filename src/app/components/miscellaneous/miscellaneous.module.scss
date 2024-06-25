@@ -59,7 +59,9 @@
   }
 }
 
-/////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////  MAIN BUTTON  ///////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
 .apothecaryBtnSet {
   position: relative;
   width: 210px;
@@ -90,6 +92,11 @@
     bottom: 0;
     rotate: 180deg;
     transform: scaleX(-1);
+  }
+  &:hover {
+    .AppButtonBranch .third {
+      background: linear-gradient(to right, #72584a 25%, #6f975f 70%);
+    }
   }
 }
 
@@ -167,36 +174,15 @@
     height: 8px;
     bottom: 0;
     left: 0;
-    background: linear-gradient(to right, #72584a 25%, #6f975f 70%);
+    background: linear-gradient(to right, #72584a 25%, #5c463a 70%); //ici
     border-radius: 0 0 5px 5px;
+    transition: background 0.2s;
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////  CANDLE  ///////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 .holder {
   margin: 12rem auto 0;
   width: 100%;
@@ -204,7 +190,9 @@
   position: relative;
 }
 
-.holder *, .holder *:before, .holder *:after {
+.holder *,
+.holder *:before,
+.holder *:after {
   position: absolute;
   content: "";
 }
@@ -214,12 +202,37 @@
   width: 25px;
   height: 75px;
   border-radius: 5px 5px 0 0;
-  box-shadow: inset 20px -30px 50px 0 rgba(0, 0, 0, 0.4), inset -20px 0 50px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: inset 20px -30px 50px 0 rgba(0, 0, 0, 0.4),
+    inset -20px 0 50px 0 rgba(0, 0, 0, 0.4);
   background: #190f02;
-  background: -moz-linear-gradient(#e48825, #e78e0e, #833c03, #4c1a03 50%, #443b36);
-  background: -webkit-linear-gradient(#e48825, #e78e0e, #833c03, #4c1a03 50%, #443b36);
-  background: -o-linear-gradient(#e48825, #e78e0e, #833c03, #4c1a03 50%, #443b36);
-  background: -ms-linear-gradient(#e48825, #e78e0e, #833c03, #4c1a03 50%, #443b36);
+  background: -moz-linear-gradient(
+    #e48825,
+    #e78e0e,
+    #833c03,
+    #4c1a03 50%,
+    #443b36
+  );
+  background: -webkit-linear-gradient(
+    #e48825,
+    #e78e0e,
+    #833c03,
+    #4c1a03 50%,
+    #443b36
+  );
+  background: -o-linear-gradient(
+    #e48825,
+    #e78e0e,
+    #833c03,
+    #4c1a03 50%,
+    #443b36
+  );
+  background: -ms-linear-gradient(
+    #e48825,
+    #e78e0e,
+    #833c03,
+    #4c1a03 50%,
+    #443b36
+  );
   background: linear-gradient(#e48825, #e78e0e, #833c03, #4c1a03 50%, #443b36);
 }
 
@@ -230,11 +243,17 @@
   right: 5px;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(to bottom, transparent 1%, #ffffffcc 20%, #ffffff22 40%, transparent 80%);
+  background: linear-gradient(
+    to bottom,
+    transparent 1%,
+    #ffffffcc 20%,
+    #ffffff22 40%,
+    transparent 80%
+  );
   filter: blur(1px);
 }
 
-.thread {  
+.thread {
   width: 3px;
   height: 18px;
   top: -17px;
@@ -243,10 +262,28 @@
   border-radius: 20% 20% 0 0;
   transform: translateX(-50%);
   background: #121212;
-  background: -moz-linear-gradient(#ffab73, #4b232c, #121212, black, #e8bb31 90%);
-  background: -webkit-linear-gradient(#ffab73, #4b232c, #121212, black, #e8bb31 90%);
+  background: -moz-linear-gradient(
+    #ffab73,
+    #4b232c,
+    #121212,
+    black,
+    #e8bb31 90%
+  );
+  background: -webkit-linear-gradient(
+    #ffab73,
+    #4b232c,
+    #121212,
+    black,
+    #e8bb31 90%
+  );
   background: -o-linear-gradient(#ffab73, #4b232c, #121212, black, #e8bb31 90%);
-  background: -ms-linear-gradient(#ffab73, #4b232c, #121212, black, #e8bb31 90%);
+  background: -ms-linear-gradient(
+    #ffab73,
+    #4b232c,
+    #121212,
+    black,
+    #e8bb31 90%
+  );
   background: linear-gradient(#ffab73, #4b232c, #121212, black, #e8bb31 90%);
 }
 
@@ -271,11 +308,13 @@
   width: 100%;
   height: 100%;
   border-radius: 50% 50% 20% 20%;
-  box-shadow: 0 0 15px 0 rgba(247, 93, 0, .4), 0 -6px 4px 0 rgba(247, 128, 0, .7);
+  box-shadow: 0 0 15px 0 rgba(247, 93, 0, 0.4),
+    0 -6px 4px 0 rgba(247, 128, 0, 0.7);
 }
 
 @keyframes moveFlame {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateX(-50%) rotate(-2deg);
   }
   50% {
@@ -284,7 +323,8 @@
 }
 
 @keyframes enlargeFlame {
-  0%, 100% {
+  0%,
+  100% {
     height: 30px;
   }
   50% {
@@ -299,8 +339,10 @@
   left: 50%;
   top: -24px;
   transform: translateX(-50%);
-  background: rgba(0, 133, 255, .7);
-  box-shadow: 0 -40px 30px 0 #dc8a0c, 0 40px 50px 0 #dc8a0c, inset 3px 0 2px 0 rgba(0, 133, 255, .6), inset -3px 0 2px 0 rgba(0, 133, 255, .6);
+  background: rgba(0, 133, 255, 0.7);
+  box-shadow: 0 -40px 30px 0 #dc8a0c, 0 40px 50px 0 #dc8a0c,
+    inset 3px 0 2px 0 rgba(0, 133, 255, 0.6),
+    inset -3px 0 2px 0 rgba(0, 133, 255, 0.6);
 }
 
 .glow:before {
@@ -326,10 +368,11 @@
   -o-filter: blur(60px);
   -ms-filter: blur(60px);
   filter: blur(60px);
-  animation: blinkIt .1s infinite;
+  animation: blinkIt 0.1s infinite;
 }
 
 @keyframes blinkIt {
-  50% { opacity: .8;}
+  50% {
+    opacity: 0.8;
+  }
 }
-
