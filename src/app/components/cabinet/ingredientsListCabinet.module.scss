@@ -1,0 +1,310 @@
+$background-ingredient: radial-gradient(
+  circle at bottom left,
+  #002529 33%,
+  #003c43 66%
+);
+
+.ingredientsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 1%;
+}
+
+.ingredient {
+  height: 100px;
+  display: flex;
+  background: $background-ingredient;
+
+  .ingrImage {
+    height: 100%;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $background-ingredient;
+  }
+
+  .ingrTitle {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+
+    button {
+      border: none;
+      width: 100%;
+      height: 50px;
+      color: white;
+      text-shadow: 0px 0px 10px #fff;
+      font-weight: 800;
+      text-transform: uppercase;
+      transition: 0.3s;
+      filter: saturate(1);
+
+      &:hover {
+        filter: saturate(5);
+      }
+    }
+
+    .ingrTypeAndRarity {
+      height: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+      }
+    }
+  }
+
+  .ingrHandle {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .counter {
+      width: 100%;
+      height: 25px;
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        width: 20%;
+        transition: 0.3s;
+
+        &:nth-child(1),
+        &:nth-child(2) {
+          background-color: #003c43;
+        }
+
+        &:nth-child(3),
+        &:nth-child(4) {
+          background-color: #002529;
+        }
+
+        &:nth-child(5) {
+          background-color: #ffffff33;
+        }
+      }
+    }
+
+    .price,
+    .successRate,
+    .quantity {
+      width: 100%;
+      height: 25px;
+      display: flex;
+      align-items: center;
+
+      p {
+        margin: 0px 5px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .successRate,
+    .quantity {
+      p {
+        span {
+          color: orange;
+        }
+      }
+    }
+  }
+
+  .add {
+    border: none;
+    background: none;
+    width: 50px;
+    transition: 0.2s;
+
+    &:hover {
+      background: #ffffff33;
+    }
+  }
+}
+
+//////////////////// COLOR CHANGE DEPENDING ON RARITY LEVEL ////////////////////
+// COMMON
+.common {
+  border: 2px solid #00c8ff;
+  box-shadow: 0px 0px 10px 1px #00c8ff;
+
+  .ingrImage {
+    border-right: 2px solid #00c8ff;
+  }
+
+  .ingrTitle {
+    border-right: 2px solid #00c8ff;
+
+    button {
+      background: linear-gradient(to top, #00aeff, transparent);
+      border-bottom: 2px solid #00c8ff;
+    }
+  }
+
+  .ingrHandle {
+    .counter > button {
+      border: 1px solid #00c8ff;
+
+      &:hover {
+        background-color: #00c8ff;
+      }
+    }
+    .price,
+    .successRate {
+      border-bottom: 1px solid #00c8ff;
+    }
+  }
+  .add {
+    border-left: 1px solid #00c8ff;
+  }
+}
+
+// UNCOMMON
+.uncommon {
+  border: 2px solid #52cc00;
+  box-shadow: 0px 0px 10px 1px #52cc00;
+
+  .ingrImage {
+    border-right: 2px solid #52cc00;
+  }
+
+  .ingrTitle {
+    border-right: 2px solid #52cc00;
+
+    button {
+      background: linear-gradient(to top, #52cc00, transparent);
+      border-bottom: 2px solid #52cc00;
+    }
+  }
+  .ingrHandle {
+    .counter > button {
+      border: 1px solid #52cc00;
+
+      &:hover {
+        background-color: #52cc00;
+      }
+    }
+    .price,
+    .successRate {
+      border-bottom: 1px solid #52cc00;
+    }
+  }
+  .add {
+    border-left: 1px solid #52cc00;
+  }
+}
+
+// RARE
+.rare {
+  border: 2px solid #f107f1;
+  box-shadow: 0px 0px 10px 1px #f107f1;
+
+  .ingrImage {
+    border-right: 2px solid #f107f1;
+  }
+
+  .ingrTitle {
+    border-right: 2px solid #f107f1;
+
+    button {
+      background: linear-gradient(to top, #f107f1, transparent);
+      border-bottom: 2px solid #f107f1;
+    }
+  }
+
+  .ingrHandle {
+    .counter > button {
+      border: 1px solid #f107f1;
+
+      &:hover {
+        background-color: #f107f1;
+      }
+    }
+    .price,
+    .successRate {
+      border-bottom: 1px solid #f107f1;
+    }
+  }
+  .add {
+    border-left: 1px solid #f107f1;
+  }
+}
+
+// EPIC
+.epic {
+  border: 2px solid #ffc400;
+  box-shadow: 0px 0px 10px 1px #ffc400;
+
+  .ingrImage {
+    border-right: 2px solid #ffc400;
+  }
+  .ingrTitle {
+    border-right: 2px solid #ffc400;
+
+    button {
+      background: linear-gradient(to top, #ffc400, transparent);
+      border-bottom: 2px solid #ffc400;
+    }
+  }
+
+  .ingrHandle {
+    .counter > button {
+      border: 1px solid #ffc400;
+
+      &:hover {
+        background-color: #ffc400;
+      }
+    }
+    .price,
+    .successRate {
+      border-bottom: 1px solid #ffc400;
+    }
+  }
+  .add {
+    border-left: 1px solid #ffc400;
+  }
+}
+
+.buttonWithOverlay {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      130deg,
+      #ffffffcc,
+      transparent 30%,
+      transparent 70%,
+      #ffffffcc
+    );
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::after {
+    opacity: 1;
+    content: "Show details";
+    font-size: 10px;
+    text-transform: capitalize;
+    font-weight: 200;
+  }
+}
