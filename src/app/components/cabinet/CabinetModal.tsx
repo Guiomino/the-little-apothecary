@@ -2,7 +2,7 @@
 
 "use client"
 
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import CloseModal from '@/app/components/miscellaneous/CloseModal';
 import IngredientsListCabinet from "./IngredientsListCabinet";
 import styles from "./cabinetModal.module.scss";
@@ -11,37 +11,21 @@ import GoldCoins from "../miscellaneous/GoldCoins";
 import FilterIngredients from "../miscellaneous/FilterIngredients";
 import UserClass from '@/app/OOP/UserClass';
 import AppButton from "../miscellaneous/AppButton";
-import Image from "next/image";
-
-
-export interface Ingredient {
-    ingredient: {
-        name: string;
-        type: string;
-        rarity: string;
-        description: string;
-        imagePath: string;
-        successRate: number;
-        price: number;
-    };
-    quantity: number;
-}
 
 interface CabinetModalProps {
-    ingredients: Ingredient[];
     onCloseClick: () => void;
+    ingredients: any[];  // Define the correct type for ingredients
 }
 
-const CabinetModal: React.FC<CabinetModalProps> = ({ ingredients, onCloseClick }) => {
-
-    const userRef = useRef(UserClass.loadFromLocalStorage() || new UserClass([], "Guest"));
+const CabinetModal: React.FC<CabinetModalProps> = ({ onCloseClick, ingredients }) => {
+    const userRef = React.useRef(UserClass.loadFromLocalStorage() || new UserClass([], "Guest"));
     const user = userRef.current;
 
-    const [showFilter, setShowFilter] = useState<boolean>(false);
-    const [goldCoins, setGoldCoins] = useState(user.gold);
-    const [isBuying, setIsBuying] = useState(false);
+    const [showFilter, setShowFilter] = React.useState<boolean>(false);
+    const [goldCoins, setGoldCoins] = React.useState(user.gold);
+    const [isBuying, setIsBuying] = React.useState(false);
 
-    useEffect(() => {
+    React.useEffect(() => {
         user.gold = goldCoins;
         user.saveToLocalStorage();
     }, [goldCoins, user]);
@@ -66,11 +50,9 @@ const CabinetModal: React.FC<CabinetModalProps> = ({ ingredients, onCloseClick }
                     <CloseModal onClick={onCloseClick} />
                 </div>
 
-
                 <div className={`${styles.list} ${styles.filter} ${styles.details}`}>
                     <IngredientsListCabinet ingredients={ingredients} />
                 </div>
-
 
                 <div className={styles.summary}>
                     <p><strong>Starting price : </strong><span>0</span></p>
@@ -82,12 +64,10 @@ const CabinetModal: React.FC<CabinetModalProps> = ({ ingredients, onCloseClick }
                     List of 2 ingredients
                 </div>
 
-
                 <div className={styles.chanceOfProfit}>
                     <p><strong>Profit : </strong><span>0</span></p>
                     <p><strong>Success rate : </strong><span>0%</span></p>
                 </div>
-
 
                 <div className={styles.cartListBtn}>
                     <AppButton
@@ -96,7 +76,6 @@ const CabinetModal: React.FC<CabinetModalProps> = ({ ingredients, onCloseClick }
                         disabled={isBuying}
                     />
                 </div>
-
 
             </div>
         </section>

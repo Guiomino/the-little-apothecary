@@ -9,17 +9,29 @@ import { useState } from "react";
 import OpenModalButton from "@/app/components/miscellaneous/OpenModalButton";
 import ApothecaryCabinet from "./components/cabinet/ApothecaryCabinet";
 import CabinetModal from "./components/cabinet/CabinetModal";
-import { Ingredient } from "./components/cabinet/CabinetModal";
+
+export interface Ingredient {
+  ingredient: {
+    name: string;
+    type: string;
+    rarity: string;
+    description: string;
+    imagePath: string;
+    successRate: number;
+    price: number;
+  };
+  quantity: number;
+}
 
 export default function Home() {
   const [isDisplayed, setIsDisplayed] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedIngredients, setSelectedIngredients] = useState<Ingredient[]>([]);
-  
+
   const modalOpenHandler = () => setIsDisplayed(!isDisplayed);
   const modalCloseHandler = () => setIsDisplayed(false);
 
-  const openCabinetModal = (type: string, ingredients: any[]) => {
+  const openCabinetModal = (type: string, ingredients: Ingredient[]) => {
     setSelectedIngredients(ingredients);
     setModalIsOpen(true);
   };
@@ -30,35 +42,29 @@ export default function Home() {
   };
 
   return (
-    <>
-      <IngredientProvider>
-        <main className={styles.mainPage}>
-          <h1>The Little Apothecary</h1>
+    <IngredientProvider>
+      <main className={styles.mainPage}>
+        <h1>The Little Apothecary</h1>
 
-          <div className={styles.OpenModalButton}>
-            <OpenModalButton onClick={modalOpenHandler} label="🧺" />
-          </div>
+        <div className={styles.OpenModalButton}>
+          <OpenModalButton onClick={modalOpenHandler} label="🧺" />
+        </div>
 
-          {isDisplayed && (
-            <>
-              <Market onCloseClick={modalCloseHandler} />
-            </>
-          )}
+        {isDisplayed && (
+          <Market onCloseClick={modalCloseHandler} />
+        )}
 
-          <div className={styles.apothecaryCabinet}>
-            <ApothecaryCabinet onOpenModal={openCabinetModal} />
-          </div>
+        <div className={styles.apothecaryCabinet}>
+          <ApothecaryCabinet onOpenModal={openCabinetModal} />
+        </div>
 
-          {modalIsOpen && (
-            <>
-              <CabinetModal
-                ingredients={selectedIngredients}
-                onCloseClick={closeCabinetModal}
-              />
-            </>
-          )}
-        </main>
-      </IngredientProvider>
-    </>
+        {modalIsOpen && (
+          <CabinetModal
+            ingredients={selectedIngredients}
+            onCloseClick={closeCabinetModal}
+          />
+        )}
+      </main>
+    </IngredientProvider>
   );
 }

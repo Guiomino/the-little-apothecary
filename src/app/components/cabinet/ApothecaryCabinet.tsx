@@ -2,10 +2,8 @@
 
 "use client"
 
-import React, { useEffect, useState } from "react";
-import { useIngredients } from "../../context/IngredientContext";
+import React from "react";
 import styles from "./apothecaryCabinet.module.scss";
-import CabinetModal from "./CabinetModal";
 import Candles from "../miscellaneous/Candles";
 
 interface ApothecaryCabinetProps {
@@ -13,35 +11,23 @@ interface ApothecaryCabinetProps {
 }
 
 const ApothecaryCabinet: React.FC<ApothecaryCabinetProps> = ({ onOpenModal }) => {
-    const [storedIngredients, setStoredIngredients] = useState<any[]>([]);
-    const ingredients = useIngredients();
-
-    const loadFromLocalStorage = (key: string) => {
-        const value = localStorage.getItem(key);
-        return value ? JSON.parse(value) : [];
-    };
-
-    useEffect(() => {
-        const storedItems = loadFromLocalStorage("UserIngredientStock");
-        setStoredIngredients(storedItems);
-    }, []);
 
     const openCabinetModal = (type: string) => {
-        const filteredIngredients = storedIngredients.filter(
-            (ingredient) => ingredient.ingredient.type === type
+        const storedItems = JSON.parse(localStorage.getItem('UserIngredientStock') || '[]');
+        const filteredIngredients = storedItems.filter(
+            (ingredient: any) => ingredient.ingredient.type === type
         );
         onOpenModal(type, filteredIngredients);
     };
 
     return (
         <div className={styles.apothecaryContainer}>
-
             <div className={styles.candles}>
-            <div className={styles.candle1}><Candles /></div>
-            <div className={styles.candle2}><Candles /></div>
-            <div className={styles.candle3}><Candles /></div>
-            <div className={styles.candle4}><Candles /></div>
-            <div className={styles.candle5}><Candles /></div>
+                <div className={styles.candle1}><Candles /></div>
+                <div className={styles.candle2}><Candles /></div>
+                <div className={styles.candle3}><Candles /></div>
+                <div className={styles.candle4}><Candles /></div>
+                <div className={styles.candle5}><Candles /></div>
             </div>
 
             <div className={styles.apothecaryTable}></div>
@@ -90,7 +76,6 @@ const ApothecaryCabinet: React.FC<ApothecaryCabinetProps> = ({ onOpenModal }) =>
                             <div className={styles.handle}></div>
                         </div>
                     </button>
-
                 </div>
             </div>
             <div className={styles.feet}></div>

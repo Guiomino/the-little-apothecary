@@ -1,6 +1,6 @@
 // IngredientsListCabinet.tsx
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./ingredientsListCabinet.module.scss";
 
@@ -22,9 +22,15 @@ interface IngredientsListCabinetProps {
 }
 
 const IngredientsListCabinet: React.FC<IngredientsListCabinetProps> = ({ ingredients }) => {
+    const [currentIngredients, setCurrentIngredients] = useState<Ingredient[]>(ingredients);
+
+    useEffect(() => {
+        setCurrentIngredients(ingredients);
+    }, [ingredients]);
+
     return (
         <ul>
-            {ingredients.map((ingredient, index) => (
+            {currentIngredients.map((ingredient, index) => (
                 <li key={index}>
                     <Image src={ingredient.ingredient.imagePath} width={40} height={40} alt={ingredient.ingredient.name} />
                     <h3>{ingredient.ingredient.name}</h3>
