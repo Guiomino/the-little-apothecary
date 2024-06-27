@@ -2,7 +2,7 @@
 
 "use client"
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CloseModal from '@/app/components/miscellaneous/CloseModal';
 import IngredientsListCabinet from "./IngredientsListCabinet";
 import styles from "./cabinetModal.module.scss";
@@ -10,7 +10,10 @@ import LevelUser from "../miscellaneous/LevelUser";
 import GoldCoins from "../miscellaneous/GoldCoins";
 import FilterIngredients from "../miscellaneous/FilterIngredients";
 import UserClass from '@/app/OOP/UserClass';
+import IngredientClass from '@/app/OOP/IngredientClass';
 import AppButton from "../miscellaneous/AppButton";
+import Details from "../details/Details";
+import IngredientsFilter from "../ingredientsFilter/IngredientsFilter";
 
 interface CabinetModalProps {
     onCloseClick: () => void;
@@ -20,18 +23,40 @@ interface CabinetModalProps {
 const CabinetModal: React.FC<CabinetModalProps> = ({ onCloseClick, ingredients }) => {
     const userRef = React.useRef(UserClass.loadFromLocalStorage() || new UserClass([], "Guest"));
     const user = userRef.current;
-
+    const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
+    const [showDetails, setShowDetails] = useState<boolean>(false);
     const [showFilter, setShowFilter] = React.useState<boolean>(false);
     const [goldCoins, setGoldCoins] = React.useState(user.gold);
     const [isBuying, setIsBuying] = React.useState(false);
 
-    React.useEffect(() => {
+    const [selectedRarity, setSelectedRarity] = useState<string | null>(null);
+    const [selectedType, setSelectedType] = useState<string | null>(null);
+
+    useEffect(() => {
         user.gold = goldCoins;
         user.saveToLocalStorage();
     }, [goldCoins, user]);
 
+    const handleIngredientClick = (ingredient: IngredientClass) => {
+        setSelectedIngredient(ingredient.name);
+        setShowDetails(true);
+    };
+
+    const handleCloseDetails = () => {
+        setShowDetails(false);
+    };
+
     const handleFilterClick = () => {
         setShowFilter(true);
+    };
+
+    const handleCloseFilter = () => {
+        setShowFilter(false);
+    };
+
+    const handleReset = (rarity: string | null, type: string | null) => {
+        setSelectedRarity(rarity);
+        setSelectedType(type);
     };
 
     const handleBuy = () => {
@@ -51,7 +76,15 @@ const CabinetModal: React.FC<CabinetModalProps> = ({ onCloseClick, ingredients }
                 </div>
 
                 <div className={`${styles.list} ${styles.filter} ${styles.details}`}>
-                    <IngredientsListCabinet ingredients={ingredients} />
+                    <IngredientsListCabinet ingredients={ingredients} onIngredientClick={handleIngredientClick} selectedType={selectedType} selectedRarity={selectedRarity} />
+
+                    {showDetails && selectedIngredient && (
+                        <Details ingredientName={selectedIngredient} onClose={handleCloseDetails} />
+                    )}
+
+                    {showFilter && (
+                        <IngredientsFilter onClose={handleCloseFilter} onTypeChange={setSelectedType} onRarityChange={setSelectedRarity} onReset={() => handleReset(null, null)} />
+                    )}
                 </div>
 
                 <div className={styles.summary}>
