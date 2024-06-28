@@ -2,30 +2,17 @@
 
 "use client"
 
-import React, { useEffect, useState } from 'react';
-import { useCartItems, useResetCounter } from '@/app/context/IngredientContext';
+import React, { useState } from 'react';
 import Image from 'next/image';
-import styles from "../market/market.module.scss";
+import styles from "./cabinetModal.module.scss"
 import IngredientClass from '@/app/OOP/IngredientClass';
 
 interface ListChoiceProps {
-    onAdd: () => void;
+    cartItems: IngredientClass[];
+    removeFromCart: (index: number) => void;
 };
 
-const ListChoice: React.FC<ListChoiceProps> = ({ onAdd }) => {
-    const [cartItems, setCartItems] = useCartItems();
-    const resetCounter = useResetCounter();
-    const [prices, setPrices] = useState<{ [key: string]: number }>({});
-
-    const removeFromCart = (index: number) => {
-        setCartItems(prevCartItems => {
-            const newCartItems = [...prevCartItems];
-            const removedItem = newCartItems.splice(index, 1)[0];
-            resetCounter(removedItem.ingredient.name);
-            return newCartItems;
-        });
-    };
-
+const ListChoice: React.FC<ListChoiceProps> = ({ cartItems, removeFromCart }) => {
     const getTypeImg = (type: string) => {
         switch (type) {
             case 'Mineral':
@@ -67,35 +54,33 @@ const ListChoice: React.FC<ListChoiceProps> = ({ onAdd }) => {
 
     return (
         <div className={styles.cart}>
-            <p style={{ textAlign: "center", marginTop: "10%" }}>{getMessage()}</p>
+            <p>{getMessage()}</p>
             {cartItems.length > 0 && (
                 <ul>
                     {cartItems.map((item, index) => {
-                        const rarityImg = getRarityImg(item.ingredient.rarity);
-                        const typeImg = getTypeImg(item.ingredient.type);
-                        const ingredientPrice = item.ingredient.price !== undefined ? item.ingredient.price : prices[item.ingredient.name] || 0;
-                        const totalPrice = item.quantity * ingredientPrice;
+                        const rarityImg = getRarityImg(item.rarity);
+                        const typeImg = getTypeImg(item.type);
 
                         return (
                             <li className={styles.cartItem} key={index}>
                                 <div className={styles.cartItemImg}>
-                                    <Image src={item.ingredient.imagePath} alt={item.ingredient.name} width={30} height={30} />
+                                    <Image src={item.imagePath} alt={item.name} width={30} height={30} />
                                     <div>{typeImg}</div>
                                 </div>
 
                                 <div className={styles.cartItemTitle}>
-                                    <h4>{item.ingredient.name}</h4>
-                                    <p>{rarityImg} {item.ingredient.rarity}</p>
+                                    <h4>{item.name}</h4>
+                                    <p>{rarityImg} {item.rarity}</p>
                                 </div>
 
                                 <div className={styles.cartItemDetails}>
-                                    <p>Quantity : {item.quantity}</p>
-                                    <p>Price : {totalPrice}</p>
+                                    <p>Price : {item.price}</p>
                                 </div>
 
                                 <div className={styles.cartItemRemove}>
                                     <button onClick={() => removeFromCart(index)}>X</button>
                                 </div>
+
                             </li>
                         );
                     })}

@@ -28,10 +28,10 @@ const CabinetModal: React.FC<CabinetModalProps> = ({ onCloseClick, ingredients }
     const [showDetails, setShowDetails] = useState<boolean>(false);
     const [showFilter, setShowFilter] = React.useState<boolean>(false);
     const [goldCoins, setGoldCoins] = React.useState(user.gold);
-    const [isBuying, setIsBuying] = React.useState(false);
-
     const [selectedRarity, setSelectedRarity] = useState<string | null>(null);
     const [selectedType, setSelectedType] = useState<string | null>(null);
+    const [cartItems, setCartItems] = useState<IngredientClass[]>([]);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     useEffect(() => {
         user.gold = goldCoins;
@@ -60,19 +60,37 @@ const CabinetModal: React.FC<CabinetModalProps> = ({ onCloseClick, ingredients }
         setSelectedType(type);
     };
 
-    const handleAdd = (() => {
-        // AFFICHER ListChoice
-    });
+    const handleAddIngredient = (ingredient: IngredientClass) => {
+        setCartItems(prevItems => {
+            if (prevItems.length < 2) {
+                setErrorMessage(null); // Réinitialise le message d'erreur
+                return [...prevItems, ingredient];
+            } else {
+                setErrorMessage("Remove an ingredient before adding a new one");
+                setTimeout(() => {
+                    setErrorMessage(null);
+                }, 3000);
+                clearTimeout
+                return prevItems;
+            }
+        });
+    };
 
-    const handleBuy = () => {
-        return <p></p>
-        // CHANGER
-    }
+    const removeFromCart = (index: number) => {
+        setCartItems(prevItems => {
+            const newItems = [...prevItems];
+            newItems.splice(index, 1);
+            return newItems;
+        });
+    };
+
+    const handleChoose = () => {
+        // A FAIRE
+    };
 
     return (
         <section className={styles.cabinetOverlay}>
             <div className={styles.cabinetModal}>
-
                 <div className={styles.top}>
                     <FilterIngredients onFilterClick={handleFilterClick} />
                     <GoldCoins initialGoldCoins={goldCoins} />
@@ -82,7 +100,7 @@ const CabinetModal: React.FC<CabinetModalProps> = ({ onCloseClick, ingredients }
                 </div>
 
                 <div className={`${styles.list} ${styles.filter} ${styles.details}`}>
-                    <IngredientsListCabinet ingredients={ingredients} onIngredientClick={handleIngredientClick} selectedType={selectedType} selectedRarity={selectedRarity} />
+                    <IngredientsListCabinet ingredients={ingredients} onIngredientClick={handleIngredientClick} selectedType={selectedType} selectedRarity={selectedRarity} onAddIngredient={handleAddIngredient} />
 
                     {showDetails && selectedIngredient && (
                         <Details ingredientName={selectedIngredient} onClose={handleCloseDetails} />
@@ -100,7 +118,8 @@ const CabinetModal: React.FC<CabinetModalProps> = ({ onCloseClick, ingredients }
                 </div>
 
                 <div className={styles.cartList}>
-                    <ListChoice onAdd={handleAdd} />
+                    {errorMessage && <p>{errorMessage}</p>}
+                    <ListChoice cartItems={cartItems} removeFromCart={removeFromCart} />
                 </div>
 
                 <div className={styles.chanceOfProfit}>
@@ -111,11 +130,10 @@ const CabinetModal: React.FC<CabinetModalProps> = ({ onCloseClick, ingredients }
                 <div className={styles.cartListBtn}>
                     <AppButton
                         label={"🍶 Choose"}
-                        onClick={handleBuy}
-                        disabled={isBuying}
+                        onClick={handleChoose}
+                        disabled={cartItems.length !== 2}
                     />
                 </div>
-
             </div>
         </section>
     );

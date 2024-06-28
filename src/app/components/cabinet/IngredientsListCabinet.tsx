@@ -23,14 +23,14 @@ interface IngredientsListCabinetProps {
     ingredients: IngredientData[];
     selectedRarity: string | null;
     selectedType: string | null;
+    onAddIngredient: (ingredient: IngredientClass) => void;
 }
 
-const IngredientsListCabinet: React.FC<IngredientsListCabinetProps> = ({ onIngredientClick, ingredients, selectedRarity, selectedType }) => {
+const IngredientsListCabinet: React.FC<IngredientsListCabinetProps> = ({ onIngredientClick, ingredients, selectedRarity, selectedType, onAddIngredient }) => {
     const [currentIngredients, setCurrentIngredients] = useState<IngredientClass[]>([]);
     const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
 
     useEffect(() => {
-        // Convertir les ingrédients en instances de IngredientClass
         const initializedIngredients = ingredients.map(ingredientData =>
             new IngredientClass(
                 ingredientData.ingredient.name,
@@ -39,7 +39,7 @@ const IngredientsListCabinet: React.FC<IngredientsListCabinetProps> = ({ onIngre
                 ingredientData.ingredient.rarity,
                 ingredientData.ingredient.imagePath,
                 ingredientData.ingredient.successRate,
-                [0, 0], // Passe priceRange comme [0, 0] car j'ai déjà le prix
+                [0, 0],
                 ingredientData.ingredient.price
             )
         );
@@ -105,7 +105,6 @@ const IngredientsListCabinet: React.FC<IngredientsListCabinetProps> = ({ onIngre
 
                 return (
                     <li key={index} className={`${styles.ingredient} ${rarityClass}`}>
-
                         <div className={styles.ingrImage}>
                             <Image src={ingredient.imagePath} width={40} height={40} alt={ingredient.name} />
                         </div>
@@ -131,7 +130,7 @@ const IngredientsListCabinet: React.FC<IngredientsListCabinetProps> = ({ onIngre
                                 <p>Quantity: {ingredients[index].quantity}</p>
                             </div>
                         </div>
-                        <button className={styles.add}>Add</button>
+                        <button className={styles.add} onClick={() => onAddIngredient(ingredient)}>Add</button>
                     </li>
                 )
             })}
@@ -140,6 +139,7 @@ const IngredientsListCabinet: React.FC<IngredientsListCabinetProps> = ({ onIngre
 };
 
 export default IngredientsListCabinet;
+
 
 
 // BUTTON ADD :
