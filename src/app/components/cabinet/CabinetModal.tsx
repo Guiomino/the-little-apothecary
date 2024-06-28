@@ -14,6 +14,7 @@ import IngredientClass from '@/app/OOP/IngredientClass';
 import AppButton from "../miscellaneous/AppButton";
 import Details from "../details/Details";
 import IngredientsFilter from "../ingredientsFilter/IngredientsFilter";
+import ListChoice from "./ListChoice";
 
 interface CabinetModalProps {
     onCloseClick: () => void;
@@ -59,8 +60,13 @@ const CabinetModal: React.FC<CabinetModalProps> = ({ onCloseClick, ingredients }
         setSelectedType(type);
     };
 
+    const handleAdd = (() => {
+        // AFFICHER ListChoice
+    });
+
     const handleBuy = () => {
         return <p></p>
+        // CHANGER
     }
 
     return (
@@ -94,7 +100,7 @@ const CabinetModal: React.FC<CabinetModalProps> = ({ onCloseClick, ingredients }
                 </div>
 
                 <div className={styles.cartList}>
-                    List of 2 ingredients
+                    <ListChoice onAdd={handleAdd} />
                 </div>
 
                 <div className={styles.chanceOfProfit}>

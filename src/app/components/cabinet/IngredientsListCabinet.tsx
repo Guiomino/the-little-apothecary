@@ -66,9 +66,41 @@ const IngredientsListCabinet: React.FC<IngredientsListCabinetProps> = ({ onIngre
         }
     };
 
+    const getTypeImg = (type: string) => {
+        switch (type) {
+            case 'Mineral':
+                return <Image src={"/images/Type/Type_Mineral.png"} width={15} height={15} alt="Mineral" />;
+            case 'Vegetal':
+                return <Image src={"/images/Type/Type_Vegetal.png"} width={15} height={15} alt="Vegetal" />;
+            case 'Animal':
+                return <Image src={"/images/Type/Type_Animal.png"} width={15} height={15} alt="Animal" />;
+            case 'Mushroom':
+                return <Image src={"/images/Type/Type_Mushroom.png"} width={15} height={15} alt="Mushroom" />;
+            default:
+                return '';
+        }
+    };
+
+    const getRarityImg = (type: string) => {
+        switch (type) {
+            case 'Common':
+                return <Image src={"/images/Rarity/Star_Common.png"} width={20} height={20} alt="Common" />;
+            case 'Uncommon':
+                return <Image src={"/images/Rarity/Star_Uncommon.png"} width={20} height={20} alt="Uncommon" />;
+            case 'Rare':
+                return <Image src={"/images/Rarity/Star_Rare.png"} width={20} height={20} alt="Rare" />;
+            case 'Epic':
+                return <Image src={"/images/Rarity/Star_Epic.png"} width={20} height={20} alt="Epic" />;
+            default:
+                return '';
+        }
+    };
+
     return (
         <ul className={styles.ingredientsContainer}>
             {currentIngredients.map((ingredient, index) => {
+                const typeImg = getTypeImg(ingredient.type);
+                const rarityImg = getRarityImg(ingredient.rarity);
                 const rarityClass = getRarityClass(ingredient.rarity);
 
                 return (
@@ -81,8 +113,8 @@ const IngredientsListCabinet: React.FC<IngredientsListCabinetProps> = ({ onIngre
                         <div className={styles.ingrTitle}>
                             <button onClick={() => handleIngredientClick(ingredient)} className={styles.buttonWithOverlay}>{ingredient.name}</button>
                             <div className={styles.ingrTypeAndRarity}>
-                                <p>Type: {ingredient.type}</p>
-                                <p>Rarity: {ingredient.rarity}</p>
+                                <p>{typeImg}{ingredient.type}</p>
+                                <p>{rarityImg}{ingredient.rarity}</p>
                             </div>
                         </div>
 
@@ -108,3 +140,12 @@ const IngredientsListCabinet: React.FC<IngredientsListCabinetProps> = ({ onIngre
 };
 
 export default IngredientsListCabinet;
+
+
+// BUTTON ADD :
+// Récupère et affiche l'ingrédient avec composant "listChoice"
+// Possibilité de cliquer 2 fois sur Add du même ingrédient
+// ListChoice ne peux afficher que 2 ingrédients
+
+// Obligation d'avoir 2 ingredients pour cliquer sur "CHOOSE"
+// Lors de Add d'un ingredient, si déjà 2 séléctionnés alors Message : "Remove an ingredient"
