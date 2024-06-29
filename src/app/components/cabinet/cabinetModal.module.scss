@@ -304,6 +304,11 @@ $borderCyan: #00eaff;
   overflow-y: scroll;
   border-bottom: 1px solid $borderCyan;
 
+  .errorMessage {
+    color: white;
+    text-shadow: 0 0 10px red, 0 0 10px red, 0 0 10px red, 0 0 10px red;
+  }
+
   // CART ITEM
   .cart {
     width: 100%;

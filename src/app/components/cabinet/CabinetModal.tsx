@@ -60,21 +60,65 @@ const CabinetModal: React.FC<CabinetModalProps> = ({ onCloseClick, ingredients }
         setSelectedType(type);
     };
 
+
+
+
+
     const handleAddIngredient = (ingredient: IngredientClass) => {
-        setCartItems(prevItems => {
-            if (prevItems.length < 2) {
-                setErrorMessage(null); // Réinitialise le message d'erreur
-                return [...prevItems, ingredient];
-            } else {
-                setErrorMessage("Remove an ingredient before adding a new one");
-                setTimeout(() => {
-                    setErrorMessage(null);
-                }, 3000);
-                clearTimeout
-                return prevItems;
-            }
-        });
+        const storedItems = JSON.parse(localStorage.getItem('UserIngredientStock') || '[]');
+        const storedIngredient = storedItems.find((item: any) => item.ingredient.name === ingredient.name);
+
+        if (storedIngredient) {
+            const quantity = storedIngredient.quantity;
+
+            setCartItems(prevItems => {
+                const itemCount = prevItems.filter(item => item.name === ingredient.name).length;
+
+                // Vérif si 2 ingredients
+                if (prevItems.length >= 2) {
+                    setErrorMessage("Remove an ingredient before adding a new one");
+                    setTimeout(() => {
+                        setErrorMessage(null);
+                    }, 3000);
+                    return prevItems;
+                }
+
+                // Vérif les conditions de quantity
+                if (quantity === 1 && itemCount < 1) {
+                    return [...prevItems, ingredient];
+                } else if (quantity === 1 && itemCount >= 1) {
+                    setErrorMessage("You can only choose this ingredient once.");
+                    setTimeout(() => {
+                        setErrorMessage(null);
+                    }, 3000);
+                    return prevItems;
+                } else if (quantity >= 2 && itemCount < 2) {
+                    return [...prevItems, ingredient];
+                } else if (itemCount >= 2) {
+                    setErrorMessage("You can only choose this ingredient twice.");
+                    setTimeout(() => {
+                        setErrorMessage(null);
+                    }, 3000);
+                    return prevItems;
+                } else {
+                    setErrorMessage("Remove an ingredient before adding a new one");
+                    setTimeout(() => {
+                        setErrorMessage(null);
+                    }, 3000);
+                    return prevItems;
+                }
+            });
+        } else {
+            setErrorMessage("Ingredient not found in stock");
+            setTimeout(() => {
+                setErrorMessage(null);
+            }, 3000);
+        }
     };
+
+
+
+
 
     const removeFromCart = (index: number) => {
         setCartItems(prevItems => {
@@ -118,7 +162,7 @@ const CabinetModal: React.FC<CabinetModalProps> = ({ onCloseClick, ingredients }
                 </div>
 
                 <div className={styles.cartList}>
-                    {errorMessage && <p>{errorMessage}</p>}
+                    {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
                     <ListChoice cartItems={cartItems} removeFromCart={removeFromCart} />
                 </div>
 
