@@ -14,19 +14,19 @@ interface FilterProps {
     onReset: (rarity: string | null, type: string | null) => void;
 };
 
-const IngredientsFilter: React.FC<FilterProps> = ({ onClose, onRarityChange, onTypeChange, onReset }) => {
+const IngredientsFilter: React.FC<FilterProps> = ({ onClose, onTypeChange, onRarityChange, onReset }) => {
 
     const [selectedRarity, setSelectedRarity] = useState<string | null>(null);
     const [selectedType, setSelectedType] = useState<string | null>(null);
 
-    const handleRarityClick = (rarity: string | null) => {
-        setSelectedRarity(rarity);
-        onRarityChange(rarity);
-    };
-
     const handleTypeClick = (type: string | null) => {
         setSelectedType(type);
         onTypeChange(type);
+    };
+
+    const handleRarityClick = (rarity: string | null) => {
+        setSelectedRarity(rarity);
+        onRarityChange(rarity);
     };
 
     return (

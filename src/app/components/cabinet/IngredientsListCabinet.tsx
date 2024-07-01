@@ -28,7 +28,6 @@ interface IngredientsListCabinetProps {
 
 const IngredientsListCabinet: React.FC<IngredientsListCabinetProps> = ({ onIngredientClick, ingredients, selectedRarity, selectedType, onAddIngredient }) => {
     const [currentIngredients, setCurrentIngredients] = useState<IngredientClass[]>([]);
-    const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
 
     useEffect(() => {
         const initializedIngredients = ingredients.map(ingredientData =>
@@ -47,7 +46,6 @@ const IngredientsListCabinet: React.FC<IngredientsListCabinetProps> = ({ onIngre
     }, [ingredients]);
 
     const handleIngredientClick = (ingredient: IngredientClass) => {
-        setSelectedIngredient(ingredient.name);
         onIngredientClick(ingredient);
     };
 
@@ -81,8 +79,8 @@ const IngredientsListCabinet: React.FC<IngredientsListCabinetProps> = ({ onIngre
         }
     };
 
-    const getRarityImg = (type: string) => {
-        switch (type) {
+    const getRarityImg = (rarity: string) => {
+        switch (rarity) {
             case 'Common':
                 return <Image src={"/images/Rarity/Star_Common.png"} width={20} height={20} alt="Common" />;
             case 'Uncommon':
@@ -96,9 +94,13 @@ const IngredientsListCabinet: React.FC<IngredientsListCabinetProps> = ({ onIngre
         }
     };
 
+    const filteredIngredients = currentIngredients
+        .filter(ingredient => selectedRarity ? ingredient.rarity === selectedRarity : true)
+        .filter(ingredient => selectedType ? ingredient.type === selectedType : true);
+
     return (
         <ul className={styles.ingredientsContainer}>
-            {currentIngredients.map((ingredient, index) => {
+            {filteredIngredients.map((ingredient, index) => {
                 const typeImg = getTypeImg(ingredient.type);
                 const rarityImg = getRarityImg(ingredient.rarity);
                 const rarityClass = getRarityClass(ingredient.rarity);
@@ -127,12 +129,12 @@ const IngredientsListCabinet: React.FC<IngredientsListCabinetProps> = ({ onIngre
                             </div>
 
                             <div className={styles.quantity}>
-                                <p>Quantity: {ingredients[index].quantity}</p>
+                                <p>Quantity: {ingredients.find(i => i.ingredient.name === ingredient.name)?.quantity}</p>
                             </div>
                         </div>
                         <button className={styles.add} onClick={() => onAddIngredient(ingredient)}>Add</button>
                     </li>
-                )
+                );
             })}
         </ul>
     );
