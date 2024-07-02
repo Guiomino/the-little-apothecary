@@ -32,11 +32,58 @@ const CabinetModal: React.FC<CabinetModalProps> = ({ onCloseClick, ingredients }
     const [selectedType, setSelectedType] = useState<string | null>(null);
     const [cartItems, setCartItems] = useState<IngredientClass[]>([]);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [startingPrice, setStartingPrice] = useState<number>(0);
+    const [sellingPrice, setSellingPrice] = useState<number>(0);
+    const [profit, setProfit] = useState<number>(0);
+    const [successRate, setSuccessRate] = useState<number | undefined>(0)
 
     useEffect(() => {
         user.gold = goldCoins;
         user.saveToLocalStorage();
     }, [goldCoins, user]);
+
+    useEffect(() => {
+        const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
+        setStartingPrice(totalPrice);
+        const totalPriceTVA = cartItems.reduce((total, item) => {
+            let rarityFactor = 1;
+            switch (item.rarity) {
+                case 'Common':
+                    if (item.price < 10) {
+                        rarityFactor = 2;
+                    } else {
+                        rarityFactor = 1.2;
+                    }
+                    break;
+                case 'Uncommon':
+                    rarityFactor = 1.3;
+                    break;
+                case 'Rare':
+                    rarityFactor = 1.4;
+                    break;
+                case 'Epic':
+                    rarityFactor = 1.5;
+                    break;
+                default:
+                    rarityFactor = 1;
+            }
+            return total + (item.price * rarityFactor);
+        }, 0);
+        setSellingPrice(Math.floor(totalPriceTVA))
+        const totalProfit = Math.floor(totalPriceTVA) - totalPrice
+        setProfit(totalProfit)
+    }, [cartItems]);
+
+    useEffect(() => {
+        if (cartItems.length > 0) {
+            const totalSuccessRate = cartItems.reduce((total, item) => total + item.successRate, 0);
+            const averageSuccessRate = totalSuccessRate / cartItems.length;
+            setSuccessRate(averageSuccessRate);
+        } else {
+            setSuccessRate(0);
+        }
+    }, [cartItems]);
+
 
     const handleIngredientClick = (ingredient: IngredientClass) => {
         setSelectedIngredient(ingredient.name);
@@ -156,9 +203,9 @@ const CabinetModal: React.FC<CabinetModalProps> = ({ onCloseClick, ingredients }
                 </div>
 
                 <div className={styles.summary}>
-                    <p><strong>Starting price : </strong><span>0</span></p>
+                    <p><strong>Starting price : </strong><span>{startingPrice}</span></p>
                     <h2>Selection</h2>
-                    <p><strong>Selling price : </strong><span>0</span></p>
+                    <p><strong>Selling price : </strong><span>{sellingPrice}</span></p>
                 </div>
 
                 <div className={styles.cartList}>
@@ -167,8 +214,8 @@ const CabinetModal: React.FC<CabinetModalProps> = ({ onCloseClick, ingredients }
                 </div>
 
                 <div className={styles.chanceOfProfit}>
-                    <p><strong>Profit : </strong><span>0</span></p>
-                    <p><strong>Success rate : </strong><span>0%</span></p>
+                    <p><strong>Profit : </strong><span>{profit}</span></p>
+                    <p><strong>Success rate : </strong><span>{successRate}%</span></p>
                 </div>
 
                 <div className={styles.cartListBtn}>
